@@ -1,0 +1,95 @@
+{
+    "Configuracion": {
+        "Carros": [
+            {
+                "Estado": "regar plantas",
+                "Hora": "06:00"
+            },
+            {
+                "Estado": "check status",
+                "Hora": "07:00"
+            },
+            {
+                "Estado": "cortar cesped",
+                "Hora": "07:30"
+            }
+        ],
+
+        "Resetas": [
+            {
+                "Nombre": "-------",
+                "Cantidad de cosas": "---",
+                "Precio": 3400,
+                "Ingredientes" :[
+                    "Papas",
+                    "Helado",
+                    "Hamburguesa"
+
+                ]
+            },
+            {
+                "Nombre": "-------",
+                "Cantidad de cosas": "---",
+                "Precio": 2300,
+                "Ingredientes" :[
+                    "Papas",
+                    "Helado",
+                    "Hamburguesa"
+
+                ]
+            },
+            {
+                "Nombre": "-------",
+                "Cantidad de cosas": "---",
+                "Precio": 1300,
+                "Ingredientes" :[
+                    "Papas",
+                    "Helado",
+                    "Hamburguesa"
+
+                ]
+            },
+            {
+                "Nombre": "-------",
+                "Cantidad de cosas": "---",
+                "Precio": 4000,
+                "Ingredientes" :[
+                    "Papas",
+                    "Helado",
+                    "Hamburguesa"
+
+                ]
+            }
+        ],
+
+        "Estados": [
+            {
+                "Nombre": "-------"
+            },
+            {
+                "Nombre": "-------"
+            },
+            {
+                "Nombre": "-------"
+            },
+            {
+                "Nombre": "-------"
+            }
+        ],
+
+        "Tiempos": [
+            {
+                "Tipo": "Solicitud de comida",
+                "Duracion": 5
+            },
+            {
+                "Tipo": "Solicitud de comida",
+                "Duracion": 5
+            },
+            {
+                "Tipo": "Solicitud de comida",
+                "Duracion": 5
+            }
+        ]
+    }
+}

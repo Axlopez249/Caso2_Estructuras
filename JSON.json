@@ -2,16 +2,28 @@
     "Configuracion": {
         "Carros": [
             {
-                "Estado": "regar plantas",
+                "Nombre": "Carro 1A",
                 "Hora": "06:00"
             },
             {
-                "Estado": "check status",
+                "Nombre": "Carro 2A",
+                "Hora": "06:30"
+            },
+            {
+                "Nombre": "Carro 3A",
                 "Hora": "07:00"
             },
             {
-                "Estado": "cortar cesped",
-                "Hora": "07:30"
+                "Nombre": "Carro 1B",
+                "Hora": "06:00"
+            },
+            {
+                "Nombre": "Carro 2B",
+                "Hora": "06:30"
+            },
+            {
+                "Nombre": "Carro 3B",
+                "Hora": "07:00"
             }
         ],
 
@@ -34,7 +46,7 @@
                 "Ingredientes" :[
                     "Papas",
                     "Helado",
-                    "Hamburguesa"
+                    "Aros de cebolla"
 
                 ]
             },
@@ -46,7 +58,7 @@
                     "Pollo frito",
                     "Tomate",
                     "Mayonesa",
-                    "Hamburguesa"
+                    "Papas"
 
                 ]
             },
@@ -57,7 +69,7 @@
                 "Ingredientes" :[
                     "Pizza",
                     "Helado",
-                    "Hamburguesa"
+                    "Refresco"
 
                 ]
             }
@@ -68,7 +80,7 @@
                 "Nombre": "Haciendo fila"
             },
             {
-                "Nombre": "Haciendo la orden"
+                "Nombre": "Solicitando la orden"
             },
             {
                 "Nombre": "En espera (mientras se prepara la comida y se ordena)"
@@ -83,15 +95,23 @@
 
         "Tiempos": [
             {
-                "Tipo": "Solicitud de comida",
+                "Tipo": "Haciendo fila",
                 "Duracion": 5
             },
             {
-                "Tipo": "Solicitud de comida",
+                "Tipo": "Solicitando la orden",
                 "Duracion": 5
             },
             {
-                "Tipo": "Solicitud de comida",
+                "Tipo": "En espera (mientras se prepara la comida y se ordena)",
+                "Duracion": 5
+            },
+            {
+                "Tipo": "Entrega de la comida",
+                "Duracion": 5
+            },
+            {
+                "Tipo": "Sale de fila",
                 "Duracion": 5
             }
         ]

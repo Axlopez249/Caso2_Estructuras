@@ -96,23 +96,28 @@
         "Tiempos": [
             {
                 "Tipo": "Haciendo fila",
-                "Duracion": 5
+                "Duracion_min": 5,
+                "Duracion_max": 10
             },
             {
                 "Tipo": "Solicitando la orden",
-                "Duracion": 5
+                "Duracion_min": 20,
+                "Duracion_max": 30
             },
             {
                 "Tipo": "En espera (mientras se prepara la comida y se ordena)",
-                "Duracion": 5
+                "Duracion_min": 40,
+                "Duracion_max": 50
             },
             {
                 "Tipo": "Entrega de la comida",
-                "Duracion": 5
+                "Duracion_min": 2,
+                "Duracion_max": 4
             },
             {
                 "Tipo": "Sale de fila",
-                "Duracion": 5
+                "Duracion_min": 1,
+                "Duracion_max": 1
             }
         ]
     }

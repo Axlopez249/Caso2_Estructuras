@@ -2,27 +2,27 @@
     "Configuracion": {
         "Carros": [
             {
-                "Nombre": "Carro 1A",
+                "Nombre": "C1V1",
                 "Hora": "06:00"
             },
             {
-                "Nombre": "Carro 2A",
+                "Nombre": "C2V1",
                 "Hora": "06:30"
             },
             {
-                "Nombre": "Carro 3A",
+                "Nombre": "C3V1",
                 "Hora": "07:00"
             },
             {
-                "Nombre": "Carro 1B",
+                "Nombre": "C1V2",
                 "Hora": "06:00"
             },
             {
-                "Nombre": "Carro 2B",
+                "Nombre": "C2V2",
                 "Hora": "06:30"
             },
             {
-                "Nombre": "Carro 3B",
+                "Nombre": "C3V2",
                 "Hora": "07:00"
             }
         ],
@@ -45,7 +45,7 @@
                 "Precio": 2300,
                 "Ingredientes" :[
                     "Papas",
-                    "Helado",
+                    "Pure",
                     "Aros de cebolla"
 
                 ]

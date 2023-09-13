@@ -1,17 +1,27 @@
-class pruebas{
-    private:
-        int x;
-        int y;
+#ifndef Colas_h
+#define Colas_h 1
+
+#include "lista.h"
+
+
+
+class cola{
+
 
     public:
-        pruebas(int px, int py){
-            x = px;
-            y = py;
+        struct lista cola;
+        
+        void enqueue(void *pDato){
+            cola.agr(pDato);
         }
 
-        int primerNum(){
-            return x;
+        void *dequeue(){
+            return cola.eliminar();
         }
+
     
 };
 
+
+
+#endif

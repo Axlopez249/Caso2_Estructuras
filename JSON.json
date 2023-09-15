@@ -52,7 +52,11 @@
             },
             {
                 "Nombre": "Orden3",
+<<<<<<< HEAD
                 "Cantidad de cosas": "3",
+=======
+                "Cantidad de cosas": "4",
+>>>>>>> 7f508b747e3b345767289bf313aec3b68878f0a6
                 "Precio": 1300,
                 "Ingredientes" :[
                     "Pollo frito",

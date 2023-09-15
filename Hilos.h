@@ -1,25 +1,25 @@
 #include <iostream>
 #include <string>
-#include "queue.h"
-#include "stack.h"
+#include "lista.h"
 
 using namespace std;
 
 class hilos{
     private:
-        Queue *cola;
-        Stack *pila;
+        
+        Queue<string> *colaCarros;
+        Stack<string> *pila;
+        List<string> *lista = new List<string>();
     public:
-        hilos(Queue *pcola, Stack *ppila){
+        hilos(/*recibiria parametro de tipo lista para inicializar bien las colas y las pilas*/){
             //Se inicializa la clase
-            /*
-            cola = pcola;
-            pila = ppila;
-            */
+            
+           
         }
 
         void hilacion(){
             //Aqui iria el codigo que permite el procesamiento continuo de los datos
+            //colaCarros->dequeue();
         }
 
 };

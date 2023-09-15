@@ -67,6 +67,11 @@ class List : public Stack<T>, public Queue<T> {
             //se llama a remove para eliminar el primero en entrar
         }
 
+        bool verificar_estado(){
+            //Se utiliza para cuando se realizan moviemientos en las colas o pilas 
+            //es para llevar un control
+        }
+
 
 
 

@@ -29,8 +29,8 @@
 
         "Resetas": [
             {
-                "Nombre": "-------",
-                "Cantidad de cosas": "---",
+                "Nombre": "Orden1",
+                "Cantidad de cosas": "3",
                 "Precio": 3400,
                 "Ingredientes" :[
                     "Papas",
@@ -40,8 +40,8 @@
                 ]
             },
             {
-                "Nombre": "-------",
-                "Cantidad de cosas": "---",
+                "Nombre": "Orden2",
+                "Cantidad de cosas": "3",
                 "Precio": 2300,
                 "Ingredientes" :[
                     "Papas",
@@ -51,8 +51,8 @@
                 ]
             },
             {
-                "Nombre": "-------",
-                "Cantidad de cosas": "---",
+                "Nombre": "Orden3",
+                "Cantidad de cosas": "4",
                 "Precio": 1300,
                 "Ingredientes" :[
                     "Pollo frito",
@@ -63,8 +63,8 @@
                 ]
             },
             {
-                "Nombre": "-------",
-                "Cantidad de cosas": "---",
+                "Nombre": "Orden4",
+                "Cantidad de cosas": "3",
                 "Precio": 4000,
                 "Ingredientes" :[
                     "Pizza",

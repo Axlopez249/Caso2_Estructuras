@@ -1,5 +1,19 @@
 {
     "Configuracion": {
+        "Rango_trabajo":[
+            {
+                "Inicio" : "06:00",
+                "Fin" : "08:30"
+            }
+
+        ],
+        "Duracion_por_seccion":[
+            {
+                "Ventanilla_S" : 5,
+                "Restaurante" : 15,
+                "Ventanilla_E" : 5
+            }
+        ],
         "Carros": [
             {
                 "Nombre": "C1V1",
@@ -15,22 +29,21 @@
             },
             {
                 "Nombre": "C1V2",
-                "Hora": "06:00"
+                "Hora": "07:30"
             },
             {
                 "Nombre": "C2V2",
-                "Hora": "06:30"
+                "Hora": "08:00"
             },
             {
                 "Nombre": "C3V2",
-                "Hora": "07:00"
+                "Hora": "'08:30"
             }
         ],
 
         "Resetas": [
             {
                 "Nombre": "Orden1",
-                "Cantidad de cosas": "3",
                 "Precio": 3400,
                 "Ingredientes" :[
                     "Papas",
@@ -41,7 +54,6 @@
             },
             {
                 "Nombre": "Orden2",
-                "Cantidad de cosas": "3",
                 "Precio": 2300,
                 "Ingredientes" :[
                     "Papas",
@@ -52,23 +64,16 @@
             },
             {
                 "Nombre": "Orden3",
-<<<<<<< HEAD
-                "Cantidad de cosas": "3",
-=======
-                "Cantidad de cosas": "4",
->>>>>>> 7f508b747e3b345767289bf313aec3b68878f0a6
                 "Precio": 1300,
                 "Ingredientes" :[
                     "Pollo frito",
                     "Tomate",
-                    "Mayonesa",
-                    "Papas"
+                    "Mayonesa"
 
                 ]
             },
             {
                 "Nombre": "Orden4",
-                "Cantidad de cosas": "3",
                 "Precio": 4000,
                 "Ingredientes" :[
                     "Pizza",

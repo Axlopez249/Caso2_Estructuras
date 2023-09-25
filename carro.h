@@ -1,5 +1,4 @@
 #ifndef carro 
-#define carro 1
 #include <string>
 #include <iostream>
 
@@ -13,6 +12,10 @@ class Carro {
         Carro(string pnombre, string ptiempo){
             nom = pnombre;
             tiempo_ingreso = ptiempo;
+        }
+
+        string get_nom(){
+            return nom;
         }
     
 };

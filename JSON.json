@@ -16,27 +16,27 @@
         ],
         "Carros": [
             {
-                "Nombre": "C1V1",
+                "Nombre": "C1",
                 "Hora": "06:00"
             },
             {
-                "Nombre": "C2V1",
+                "Nombre": "C2",
                 "Hora": "06:30"
             },
             {
-                "Nombre": "C3V1",
+                "Nombre": "C3",
                 "Hora": "07:00"
             },
             {
-                "Nombre": "C1V2",
+                "Nombre": "C4",
                 "Hora": "07:30"
             },
             {
-                "Nombre": "C2V2",
+                "Nombre": "C5",
                 "Hora": "08:00"
             },
             {
-                "Nombre": "C3V2",
+                "Nombre": "C6",
                 "Hora": "'08:30"
             }
         ],

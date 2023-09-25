@@ -7,7 +7,7 @@ using namespace std;
 // Función que se ejecutará continuamente en un hilo
 void funcionContinua() {
     int c = 0;
-    while (true) {
+    while (c <= 5) {
         // Coloca aquí la lógica que deseas que se ejecute continuamente
 
         // Por ejemplo, puedes imprimir un mensaje cada segundo

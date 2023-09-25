@@ -11,12 +11,20 @@ class Reseta {
         int precio;
         vector<string> ingredientes;
     public:
-        Reseta(string pnombre, int pcant, int pprecio, vector<string> pingre){
+        Reseta(string pnombre, int pprecio, vector<string> &pingre){
             nom = pnombre;
-            cantidad = pcant;
             precio = pprecio;
             ingredientes = pingre;
         }
+
+        string getNom(){
+            return nom;
+        }
+        int getPrecio(){
+            return precio;
+        }
+
+
     
 };
 

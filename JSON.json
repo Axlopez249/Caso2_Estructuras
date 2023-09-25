@@ -83,6 +83,20 @@
                 ]
             }
         ],
+        "ordenResetas":[
+            "Papas",
+            "Pure",
+            "Aros de cebolla",
+            "Pizza",
+            "Helado",
+            "Refresco",
+            "Pollo frito",
+            "Tomate",
+            "Mayonesa",
+            "Papas",
+            "Helado",
+            "Hamburguesa"
+        ],
 
         "Estados": [
             {

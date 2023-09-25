@@ -10,6 +10,8 @@
 using namespace std;
 
 int main(){
+
+    vector<string> orden_resetas;
     vector<Reseta> resetas;
     vector<Carro> carros;
 
@@ -20,7 +22,7 @@ int main(){
     Restaurant restaurant = new Restaurant(resetas);
 
     //Se generan los datos
-    generar_carros(resetas, carros);
+    generar_carros(resetas, carros, orden_resetas);
 
     //uso de un tipo de funcion lambda para utilizar en el hilo una funcion que tiene parametros
     thread hilo([&]() {

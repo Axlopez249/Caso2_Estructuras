@@ -23,6 +23,9 @@ class Reseta {
         int getPrecio(){
             return precio;
         }
+        vector<string> getIngredientes(){
+            return ingredientes;
+        }
 
 
     

@@ -21,7 +21,7 @@ using json = nlohmann::json;  // Alias para la biblioteca JSON de nlohmann
 
 // Declaración de las clases Reseta y Carro (asegúrate de que estén definidas en tu código)
 
-void generar_carros(std::vector<Reseta>& presetas, std::vector<Carro>& carros) {
+void generar_carros(std::vector<Reseta>& presetas, std::vector<Carro>& carros, std::vector<string>& orden) {
     std::ifstream archivo_json("JSON.json");
 
     if (!archivo_json.is_open()) {
@@ -34,6 +34,12 @@ void generar_carros(std::vector<Reseta>& presetas, std::vector<Carro>& carros) {
 
     json carros_json = configuracion["Configuracion"]["Carros"];
     json resetas_json = configuracion["Configuracion"]["Resetas"];
+    json orden_json = configuracion["configuracion"]["ordenResetas"];
+
+    //guardo el orden en un vector de string
+    for (auto& cada_orden : orden_json) {
+        orden.push_back(cada_orden);
+    }
 
     // Usa un vector para meter los objetos de tipo reseta
     for (auto& reseta_json : resetas_json) {
@@ -93,17 +99,18 @@ void ingreso_ventanilla(Queue<string[]> *cola1, Queue<string[]> *cola2, Restaura
     ventanillaS ventanilla_1 = new ventanillaS();
     ventanillaS ventanilla_2 = new ventanillaS();
 
-    //se crea el restaurante como un objeto que prepara y acomoda la comida
-
     //va a tomar la orden segun un tiempo random que se extrae igualmente del json que de hecho falta eso
     //extraer los tiempos para usar los random segun esas reglas
+
     while (!cola1->isEmpty())
     {
-        string elemento_cola[] = cola1->dequeue();
+        string elemento_cola1[] = cola1->dequeue();
+        string elemento_cola2[] = cola2->dequeue();
         //se ingresa a ventanilla para que vaya a procesar la orden con respecto al restaurant
-        ventanilla_1.procesarOrden(elemento_cola, prestaurante);
+        ventanilla_1.procesarOrden(elemento_cola1, prestaurante);
+        ventanilla_2.procesarOrden(elemento_cola2, prestaurante);
 
-        
+        //esto se va ir haciendo cada cierto tiempo
     }
     
 }

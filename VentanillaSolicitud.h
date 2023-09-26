@@ -13,11 +13,9 @@ class ventanillaS{
         ventanillaS(){
         }
 
-        void procesarOrden(string [] carro_orden, Restaurant prestaurant){
+        void procesarOrden(string [] carro_orden, Restaurant pRestaurant){
             //se procesa el elemento carro con su orden
-            prestaurant.conocerOrden();
-            prestaurant.cocinar();
-
+            //Luego se usa el .h restaurant para prepararla
         }
         
 

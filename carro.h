@@ -1,4 +1,5 @@
 #ifndef carro 
+#define carro
 #include <string>
 #include <iostream>
 
@@ -8,14 +9,14 @@ class Carro {
     private:
         string nom;
         string tiempo_ingreso;
+
     public:
-        Carro(string pnombre, string ptiempo){
-            nom = pnombre;
-            tiempo_ingreso = ptiempo;
+        Carro(string pNombre, string pTiempo){
+            //Se le asigna el nombre y tiempo al carro
         }
 
         string get_nom(){
-            return nom;
+            // return nom
         }
     
 };

@@ -1,49 +1,36 @@
 {
     "Configuracion": {
-        "Rango_trabajo":[
-            {
-                "Inicio" : "06:00",
-                "Fin" : "08:30"
-            }
-
-        ],
-        "Duracion_por_seccion":[
-            {
-                "Ventanilla_S" : 5,
-                "Restaurante" : 15,
-                "Ventanilla_E" : 5
-            }
-        ],
         "Carros": [
             {
-                "Nombre": "C1",
+                "Nombre": "C1V1",
                 "Hora": "06:00"
             },
             {
-                "Nombre": "C2",
+                "Nombre": "C2V1",
                 "Hora": "06:30"
             },
             {
-                "Nombre": "C3",
+                "Nombre": "C3V1",
                 "Hora": "07:00"
             },
             {
-                "Nombre": "C4",
-                "Hora": "07:30"
+                "Nombre": "C1V2",
+                "Hora": "06:00"
             },
             {
-                "Nombre": "C5",
-                "Hora": "08:00"
+                "Nombre": "C2V2",
+                "Hora": "06:30"
             },
             {
-                "Nombre": "C6",
-                "Hora": "'08:30"
+                "Nombre": "C3V2",
+                "Hora": "07:00"
             }
         ],
 
         "Resetas": [
             {
                 "Nombre": "Orden1",
+                "Cantidad de cosas": "3",
                 "Precio": 3400,
                 "Ingredientes" :[
                     "Papas",
@@ -54,6 +41,7 @@
             },
             {
                 "Nombre": "Orden2",
+                "Cantidad de cosas": "3",
                 "Precio": 2300,
                 "Ingredientes" :[
                     "Papas",
@@ -64,16 +52,19 @@
             },
             {
                 "Nombre": "Orden3",
+                "Cantidad de cosas": "4",
                 "Precio": 1300,
                 "Ingredientes" :[
                     "Pollo frito",
                     "Tomate",
-                    "Mayonesa"
+                    "Mayonesa",
+                    "Papas"
 
                 ]
             },
             {
                 "Nombre": "Orden4",
+                "Cantidad de cosas": "3",
                 "Precio": 4000,
                 "Ingredientes" :[
                     "Pizza",
@@ -82,20 +73,6 @@
 
                 ]
             }
-        ],
-        "ordenResetas":[
-            "Papas",
-            "Pure",
-            "Aros de cebolla",
-            "Pizza",
-            "Helado",
-            "Refresco",
-            "Pollo frito",
-            "Tomate",
-            "Mayonesa",
-            "Papas",
-            "Helado",
-            "Hamburguesa"
         ],
 
         "Estados": [
@@ -141,6 +118,13 @@
                 "Tipo": "Sale de fila",
                 "Duracion_min": 1,
                 "Duracion_max": 1
+            }
+        ],
+        
+        "TiemposSimulacion": [
+            {
+                "Unidad": "segundos",
+                "RelacionReal": 6.0
             }
         ]
     }

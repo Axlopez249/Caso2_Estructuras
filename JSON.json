@@ -121,10 +121,10 @@
             }
         ],
         
-        "TiemposSimulacion": [
+        "TiempoSimulacion": [
             {
-                "Unidad": "segundos",
-                "RelacionReal": 6.0
+                "Unidad": "minutos",
+                "RelacionReal": 0.016666666666666666
             }
         ]
     }

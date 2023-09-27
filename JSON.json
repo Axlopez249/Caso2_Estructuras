@@ -1,81 +1,69 @@
 {
-    "Configuracion": {
-        "Carros": [
+
+        "GeneradorCarros": [
             {
-                "Nombre": "C1V1",
-                "Hora": "06:00"
-            },
-            {
-                "Nombre": "C2V1",
-                "Hora": "06:30"
-            },
-            {
-                "Nombre": "C3V1",
-                "Hora": "07:00"
-            },
-            {
-                "Nombre": "C1V2",
-                "Hora": "06:00"
-            },
-            {
-                "Nombre": "C2V2",
-                "Hora": "06:30"
-            },
-            {
-                "Nombre": "C3V2",
-                "Hora": "07:00"
+                "Cantidad": 200,
+                "TiempoEntreCarros": 10
             }
         ],
 
-        "Resetas": [
+        "Postres": [
             {
-                "Nombre": "Orden1",
-                "Cantidad de cosas": "3",
-                "Precio": 3400,
-                "Ingredientes" :[
-                    "Papas",
-                    "Helado",
-                    "Hamburguesa"
-
-                ]
+                "Nombre": "Helado simple"
             },
             {
-                "Nombre": "Orden2",
-                "Cantidad de cosas": "3",
-                "Precio": 2300,
-                "Ingredientes" :[
-                    "Papas",
-                    "Pure",
-                    "Aros de cebolla"
-
-                ]
+                "Nombre": "Helado doble"
             },
             {
-                "Nombre": "Orden3",
-                "Cantidad de cosas": "4",
-                "Precio": 1300,
-                "Ingredientes" :[
-                    "Pollo frito",
-                    "Tomate",
-                    "Mayonesa",
-                    "Papas"
-
-                ]
-            },
-            {
-                "Nombre": "Orden4",
-                "Cantidad de cosas": "3",
-                "Precio": 4000,
-                "Ingredientes" :[
-                    "Pizza",
-                    "Helado",
-                    "Refresco"
-
-                ]
+                "Nombre": "Batido de fresa"
             }
         ],
 
-       
+        "ComidaPesada": [
+            {
+                "Nombre": "Hamburguesa"
+            },
+            {
+                "Nombre": "Taco"
+            },
+            {
+                "Nombre": "Burrito"
+            },
+            {
+                "Nombre": "Hot dog"
+            }
+        ],
+
+        "Extra": [
+            {
+                "Nombre": "Papas grandes"
+            },
+            {
+                "Nombre": "Pure"
+            },
+            {
+                "Nombre": "Papas medianas"
+            },
+            {
+                "Nombre": "Platanos"
+            }
+        ],
+
+        "Bebida": [
+            {
+                "Nombre": "Coca"
+            },
+            {
+                "Nombre": "Fanta"
+            },
+            {
+                "Nombre": "Te frio"
+            },
+            {
+                "Nombre": "7Up"
+            }
+        ],
+        
         "Tiempos": [
             {
                 "Tipo": "Haciendo fila",
@@ -110,5 +98,5 @@
                 "RelacionReal": 0.016666666666666666
             }
         ]
-    }
+    
 }

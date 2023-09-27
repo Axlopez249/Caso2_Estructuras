@@ -27,7 +27,8 @@
             }
         ],
 
-        "Resetas": [
+        "Recetas": [
+
             {
                 "Nombre": "Orden1",
                 "Cantidad de cosas": "3",
@@ -75,25 +76,7 @@
             }
         ],
 
-        "Estados": [
-            {
-                "Nombre": "Haciendo fila"
-            },
-            {
-                "Nombre": "Solicitando la orden"
-            },
-            {
-                "Nombre": "En espera (mientras se prepara la comida y se ordena)"
-            },
-            {
-                "Nombre": "Entrega de la comida"
-            },
-            {
-                "Nombre": "Sale de fila"
-            }
-        ],
-
-        "Tiempos": [
+        "TiemposEstados": [
             {
                 "Tipo": "Haciendo fila",
                 "Duracion_min": 5,

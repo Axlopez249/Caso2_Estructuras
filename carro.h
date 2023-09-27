@@ -11,12 +11,11 @@ class Carro {
 
     public:
         Carro(int pid){
-            //Se le asigna el id al veh
+            //Se le asigna el id al vehiculo
         }
 
         int get_id(){
-            // return nom
-        }
+            // return id
     
 };
 

@@ -11,9 +11,5 @@ void generarEstados(vector<Estado> &estados){
     //se retorna lleno
 }
 
-void generar_orden_ordenes(vector<string> &ordenes){
-    //Se extrae el orden de las ordenes
-    //se retorna lleno
-}
 
 #endif

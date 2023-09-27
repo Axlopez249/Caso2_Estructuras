@@ -7,43 +7,22 @@ using namespace std;
 
 class Reseta {
     private:
-        vector<string> refrescos;
-        vector<string> platosFuerte;
-        vector<string> platosSuave;
-        vector<strign> postres;
-        vector<string> ingredientes;
+        String refrescos;
+        String platosFuerte;
+        String extra;
+        String postre;
+        vector<string> orden;
     public:
-        Reseta(){
-            //Se crea la receta
-            //Aquí se  extrae  la info del json
-            //Se guarda en los vectores para luego ser usados en ventanilla y asiginar orden al vehiculo
-        }
-        vector<string> getIngredientes(){
-            //return ingredientes
+        string obtenerIngrediente(cons string& categoria){
+            //Se extrae un ingrediente
+            //se retorna el ingrediente
         }
 
-
-        vector<string> getplatosFuerte(){
-            //return platosFuerte
+        string generarOrden(){
+            //Se crea la orden utilizando
+            //el metodo obtenerIngrediente
+            //retorna orden
         }
-
-        vector<string> getplatosSuave(){
-            //return platosSuave
-        }
-
-        vector<string> getpostres(){
-            //return postres
-        }
-
-        vector<string> getrefrescos(){
-            //return refrescos
-        }
-
-
-
-
-
-    
 };
 
 #endif

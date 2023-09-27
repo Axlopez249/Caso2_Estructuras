@@ -8,7 +8,7 @@ using namespace std;
 class Carro {
     private:
         string nom;
-        string tiempo_ingreso;
+        int tiempo_ingreso;
 
     public:
         Carro(string pNombre, string pTiempo){

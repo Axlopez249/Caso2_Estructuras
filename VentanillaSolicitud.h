@@ -8,7 +8,7 @@ using namespace std;
 class ventanillaS{
     private:
         string nom_carro;
-        string nom_orden;
+        string nom_orden;//Los nombres son string
     public:
         ventanillaS(){
         }

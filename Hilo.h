@@ -31,18 +31,25 @@ class hilos{
         Stack<string> *pila;
         List<string> *lista = new List<string>();
     public:
-        void generar_carros(std::vector<Receta>& pRecetas, std::vector<Carro>& pCarros, std::vector<String>& orden){
+
+        void generar_carros(Queue<string[]> *pColaCarros, Queue<string[]> *pColaCarros2){
             //Se generan carros para la simulacion...
+            //Se van metiendo a la cola de los carros
         }
 
 
-        void ingresar_cola(vector<Carro> &pCarro, vector<Receta> &pReceta, Queue<string[]> *pColaCarros){
-            //Se ingresan los carros a la cola de espera
-        }
-
-
-        void ingreso_ventanilla(Queue<string[]> *cola1, Queue<string[]> *cola2, Restaurant pRestaurante){
+        void ingreso_ventanilla(Queue<string[]> *pColaCarros, Queue<string[]> *pColaCarros2){
             //Se ingresan los carros a la ventanilla
+            //Aqui voy tomando las colas de lo carros que van ingresando
+            //Voy asignandoles una orden para pasarlos al restaurante
+            //El carro pasa a cola de espera mientras se prepara la comida 
+        }
+
+        void ingreso_restaurant(vector<string>orden){
+            //Aqui se toma cada cosa de la orden y se va apilando segun un orden que tiene el restaurante
+            //Se toma en cuenta el tiempo del estado que viene en las reglas del json con un numero random
+            //Despues de apilado todo y teniendo el id del carro se busca en la cola de espera y se le hace dequeue 
+            //colocando el ultimo estado como true y llevando su comida apilada
         }
 
         void tiempo_ventanilla(vector<Carro> &pCarro){

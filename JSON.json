@@ -1,101 +1,38 @@
 {
     "Configuracion": {
-        "Carros": [
-            {
-                "Nombre": "C1V1",
-                "Hora": "06:00"
-            },
-            {
-                "Nombre": "C2V1",
-                "Hora": "06:30"
-            },
-            {
-                "Nombre": "C3V1",
-                "Hora": "07:00"
-            },
-            {
-                "Nombre": "C1V2",
-                "Hora": "06:00"
-            },
-            {
-                "Nombre": "C2V2",
-                "Hora": "06:30"
-            },
-            {
-                "Nombre": "C3V2",
-                "Hora": "07:00"
-            }
-        ],
+        "Carros": {
+            "Cantidad": 100,
+            "temp_min": 1,
+            "temp_max": 3
+        },
 
-        "Recetas": [
-
-            {
-                "Nombre": "Orden1",
-                "Cantidad de cosas": "3",
-                "Precio": 3400,
-                "Ingredientes" :[
-                    "Papas",
-                    "Helado",
-                    "Hamburguesa"
-
-                ]
-            },
-            {
-                "Nombre": "Orden2",
-                "Cantidad de cosas": "3",
-                "Precio": 2300,
-                "Ingredientes" :[
-                    "Papas",
-                    "Pure",
-                    "Aros de cebolla"
-
-                ]
-            },
-            {
-                "Nombre": "Orden3",
-                "Cantidad de cosas": "4",
-                "Precio": 1300,
-                "Ingredientes" :[
-                    "Pollo frito",
-                    "Tomate",
-                    "Mayonesa",
-                    "Papas"
-
-                ]
-            },
-            {
-                "Nombre": "Orden4",
-                "Cantidad de cosas": "3",
-                "Precio": 4000,
-                "Ingredientes" :[
-                    "Pizza",
-                    "Helado",
-                    "Refresco"
-
-                ]
-            }
-        ],
+        "Recetas": {
+            "platoFuerte":["Pollo frito","Hamburguesa","pizza"],
+            "platoSuave":["Papas", "Pure", "Aros de cebolla"],
+            "Postres":["Helado", "Gelatina", "Flan"],
+            "Refrescos":["Gaseosa", "Fresco Natural", "Té frío"]
+        },
 
         "TiemposEstados": [
             {
                 "Tipo": "Haciendo fila",
-                "Duracion_min": 5,
-                "Duracion_max": 10
+                "Duracion_min": 3,
+                "Duracion_max": 6
             },
             {
                 "Tipo": "Solicitando la orden",
-                "Duracion_min": 20,
-                "Duracion_max": 30
+                "Duracion_min": 1,
+                "Duracion_max": 2
             },
             {
                 "Tipo": "En espera (mientras se prepara la comida y se ordena)",
-                "Duracion_min": 40,
-                "Duracion_max": 50
+                "Duracion_min": 2,
+                "Duracion_max": 4
             },
             {
                 "Tipo": "Entrega de la comida",
-                "Duracion_min": 2,
-                "Duracion_max": 4
+                "Duracion_min": 1,
+                "Duracion_max": 3
             },
             {
                 "Tipo": "Sale de fila",

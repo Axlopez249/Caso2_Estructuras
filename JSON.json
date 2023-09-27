@@ -2,8 +2,9 @@
 
         "GeneradorCarros": [
             {
-                "Cantidad": 200,
-                "TiempoEntreCarros": 10
+                "Cantidad": 100,
+                "TiempoMin": 1,
+                "TiempoMax": 3
             }
         ],
 

@@ -7,13 +7,13 @@ using namespace std;
 
 class ventanillaS{
     private:
-        string nom_carro;
-        string nom_orden;//Los nombres son string
+        int id_carro;
+        int id_orden; //Los nombres de las recetas son un string no un int
     public:
         ventanillaS(){
         }
 
-        void procesarOrden(string [] carro_orden, Restaurant pRestaurant){
+        void procesarOrden(vector<string> &refrescos,vector<string> &fuerte,vector<string> &suave,vector<string> &postres,Restaurant pRestaurant){
             //se procesa el elemento carro con su orden
             //Luego se usa el .h restaurant para prepararla
         }

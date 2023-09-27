@@ -7,15 +7,14 @@ using namespace std;
 
 class Carro {
     private:
-        string nom;
-        int tiempo_ingreso;
+        int id;
 
     public:
-        Carro(string pNombre, string pTiempo){
-            //Se le asigna el nombre y tiempo al carro
+        Carro(int pid){
+            //Se le asigna el id al veh
         }
 
-        string get_nom(){
+        int get_id(){
             // return nom
         }
     

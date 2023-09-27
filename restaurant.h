@@ -7,22 +7,16 @@ using namespace std;
 
 class Restaurant{
     private:
-        string nom_orden;//Se usaran en 
-        int precio;//conocerOrden
+        id orden; //Se usara dento de conocerOrden para saber que orden se va a cocinar
         vector<string> ingredientes_orden;
         vector<string> orden_orden: //este es el orden de las ordenes
-        vector<Reseta> resetas;
-    public:
-        Restaurant(vector<Reseta> &pResetas, vector<string> &pOrden_orden){
-            //Se crean las ordenes del restaurante
-        }
 
-        void conocerOrden(string pOrden){
-            //Para saber con que orden se trabaja
-            //Se llama a coninar() para acomodar la comida
-            
+    public:
+        Restaurant(vector<string> &porden, vector<string> &pOrden_orden){
+            //Se crean las ordenes del restaurante
         }
 
         void cocinar(){
             //Preparacion de las ordenes
-};
+        };
+}

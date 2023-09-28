@@ -7,16 +7,28 @@ using namespace std;
 
 class Restaurant{
     private:
-        id orden; //Se usara dento de conocerOrden para saber que orden se va a cocinar
+        int id_orden; //Se usara dento de conocerOrden para saber que orden se va a cocinar
         vector<string> ingredientes_orden;
         vector<string> orden_orden: //este es el orden de las ordenes
+        Stack<string> entrega = new List<string>();
 
     public:
-        Restaurant(vector<string> &porden, vector<string> &pOrden_orden){
-            //Se crean las ordenes del restaurante
+        Restaurant(){
+            //Se extrae el orden de apilacions
         }
 
-        void cocinar(){
+        void cocinar(vector<string> &orden){
             //Preparacion de las ordenes
+            //apilacion de las ordenes
         };
+
+        Stack<string> getStack(){
+            //return entrega
+        }
+
+
+
+
+
+        
 }

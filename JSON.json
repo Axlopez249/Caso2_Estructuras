@@ -10,7 +10,7 @@
 
     "Postres": [ "Helado simple","Helado doble","Batido de fresa"],
     "ComidaPesada": ["Hamburguesa", "Taco", "Burrito", "Hot dog"],
-    "Extra": ["Papas grandes", "Nombre": "Pure", "Papas medianas", "Platanos"],
+    "Extra": ["Papas grandes", "Nombre", "Pure", "Papas medianas", "Platanos"],
     "Bebida": [ "Coca", "Fanta", "Te frio", "7Up"],
     
     "Tiempos": [

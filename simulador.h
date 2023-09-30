@@ -14,12 +14,13 @@
 #include "lista.h"
 #include "queue.h"
 #include "stack.h"
+#include "configJson.cpp"
 
 #include "json.hpp"
 
-//#include "carro.h"
+#include "carro.h"
 //#include "reseta.h"
-//#include "ventanillaSolicitud.h"
+#include "ventanillaSolicitud.h"
 
 using namespace std;
 
@@ -28,13 +29,15 @@ class simulador
 private:
     List<ventanillaS *> *ventanillas;
     ConfigSimulacion config;
+    ConfigGeneradorCarros configCarros
     int cantidadCarros;
     int carrosInvertalo;
 
 public:
     Simulador(ConfigJson *pConfig, Restaurant *currentRestaurant)
     {
-        config = pConfig.getConfigSimulacion();
+        config = pconfig.getConfigSimulacion();
+        configCarros = config.getConfigCarros();
         ventanillas = new List<ventanillaS>();
 
         // recorrer la cantidad de ventanillas y crearlas
@@ -46,11 +49,34 @@ public:
         //)
 
         // aqui creo el hilo que va a generar los carros y le hago start
+        for (int i = 0; i < config.ventanillas; i++)
+        {
+            ventanillaS nueva_ventanilla = new ventanillaS(pconfig.getcomidasPesadas(), config.getBebidas(), config.getpostres(),
+             config.getextras(), configCarros.min, configCarros.max);
+            nueva_ventanilla.setRestaurant(currentRestaurant);
+            ventanillas->add(nueva_ventanilla);
+        }
 
+        std::thread miHilo(generar_carros);
+        miHilo.join();
+        
     }
 
     void generar_carros()
     {
+        while (true)
+        {
+            //Se generan carros de forma infinita cada un intervalo de tiempo que se transforma a milisegundo
+            for (int i = 0; i <= configCarros.cantidad; i++)
+            {
+                carro *carro = new carro();
+                //Aqui se continua pero no tengo muy clara la idea
+
+            }
+            std::this_thread::sleep_for(std::chrono::milliseconds(configCarros.intervalo*60*1000));
+            
+        }
+        
         // Se generan carros para la simulacion en forma infinita
         // Se van metiendo cada carro ventanilla por ventanilla
     }

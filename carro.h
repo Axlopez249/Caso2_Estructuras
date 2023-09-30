@@ -10,7 +10,7 @@ class carro {
         int id;
 
     public:
-        Carro(int pid){
+        Carro(){
             //Se le asigna el id al veh
         }
 

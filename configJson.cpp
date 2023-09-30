@@ -152,9 +152,24 @@ public:
         return tiempos;
     }
 
-    List<string> *getRefrescos()
+    List<string> *getBebidas()
     {
         return bebidas;
+    }
+
+    List<string> *getcomidasPesadas()
+    {
+        return comidasPesadas;
+    }
+
+    List<string> *getpostres()
+    {
+        return postres;
+    }
+
+    List<string> *getextras()
+    {
+        return extras;
     }
 
     int getMinTiempoFilaVentanilla()

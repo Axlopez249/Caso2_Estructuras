@@ -11,17 +11,20 @@ class ventanillaS
 {
 private:
     Queue<Carro *> *carrosEsperando;
-    List<string> *refrescos;
-    List<string> *comidas;
+    List<string> *bebidas;
+    List<string> *comidasPesadas;
     List<string> *postres;
+    List<string> *extras;
     Restaurant *currentRestaurant;
 
     int id_carro;
     int id_orden; // Los nombres de las recetas son un string no un int
 public:
-    ventanillaS(List<string> *comidas, List<string> *refrescos, List<String> *postres, int minTiempoEnFila, int maxTimpoEnFila)
+    ventanillaS(List<string> *pcomidas, List<string> *prefrescos, List<String> *postres, List<String> *extras, int minTiempoEnFila, int maxTimpoEnFila)
     {
         // arrancar el hilo de procesamiento
+        std::thread miHilo(procesarOrden);
+        miHilo.join();
     }
 
     void addCarro(Carro *pNewCarro)
@@ -44,6 +47,6 @@ public:
 
     void setRestaurant(Restaurant *current)
     {
-        //Se crea un unico restaurante
+        currentRestaurant = current;
     }
 };

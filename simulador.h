@@ -17,9 +17,9 @@
 
 #include "json.hpp"
 
-#include "carro.h"
-#include "receta.h"
-#include "ventanillaSolicitud.h"
+//#include "carro.h"
+//#include "reseta.h"
+//#include "ventanillaSolicitud.h"
 
 using namespace std;
 
@@ -36,6 +36,16 @@ public:
     {
         config = pConfig.getConfigSimulacion();
         ventanillas = new List<ventanillaS>();
+
+        // recorrer la cantidad de ventanillas y crearlas
+        // for por cantidad de ventanillas (
+        // nueva = new ventanillaS(pConfig->,,,);
+        // nueva.setRestaurant();
+        //     ventanillas->add(nueva)
+        //
+        //)
+
+        // aqui creo el hilo que va a generar los carros y le hago start
 
     }
 

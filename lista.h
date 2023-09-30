@@ -1,4 +1,4 @@
-#include "nodo.h"
+#include "Node.h"
 #include "stack.h"
 #include "queue.h"
 #include <unordered_map>
@@ -140,7 +140,15 @@ class List : public Stack<T>, public Queue<T> {
                 size--;
             }
             return result;
-        };
+        }
+
+        void printValues(){
+            Node<T>* current = this->first;
+            while (current != nullptr) {
+                std::cout << *current->getData() << " "<< endl;
+                current = current->getNext();
+            }
+        }
 
         void push(T* pValue) {
             insert(0, pValue);

@@ -5,7 +5,7 @@
 
 using namespace std;
 
-class Reseta {
+class reseta {
     private:
         vector<string> refrescos;
         vector<string> platosFuerte;

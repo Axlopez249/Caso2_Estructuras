@@ -5,7 +5,7 @@
 
 using namespace std;
 
-class Carro {
+class carro {
     private:
         int id;
 

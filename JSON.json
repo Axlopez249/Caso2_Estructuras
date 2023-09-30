@@ -1,103 +1,51 @@
 {
 
-        "GeneradorCarros": [
-            {
-                "Cantidad": 100,
-                "TiempoMin": 1,
-                "TiempoMax": 3
-            }
-        ],
+    "GeneradorCarros": [
+        {
+            "Cantidad": 100,
+            "interval" : 3,
+            "TiempoMin": 1,
+            "TiempoMax": 3
+        }
+    ],
 
-        "Postres": [
-            {
-                "Nombre": "Helado simple"
-            },
-            {
-                "Nombre": "Helado doble"
-            },
-            {
-                "Nombre": "Batido de fresa"
-            }
-        ],
-
-        "ComidaPesada": [
-            {
-                "Nombre": "Hamburguesa"
-            },
-            {
-                "Nombre": "Taco"
-            },
-            {
-                "Nombre": "Burrito"
-            },
-            {
-                "Nombre": "Hot dog"
-            }
-        ],
-
-        "Extra": [
-            {
-                "Nombre": "Papas grandes"
-            },
-            {
-                "Nombre": "Pure"
-            },
-            {
-                "Nombre": "Papas medianas"
-            },
-            {
-                "Nombre": "Platanos"
-            }
-        ],
-
-        "Bebida": [
-            {
-                "Nombre": "Coca"
-            },
-            {
-                "Nombre": "Fanta"
-            },
-            {
-                "Nombre": "Te frio"
-            },
-            {
-                "Nombre": "7Up"
-            }
-        ],
-        
-        "Tiempos": [
-            {
-                "Tipo": "Haciendo fila",
-                "Duracion_min": 5,
-                "Duracion_max": 10
-            },
-            {
-                "Tipo": "Solicitando la orden",
-                "Duracion_min": 20,
-                "Duracion_max": 30
-            },
-            {
-                "Tipo": "En espera (mientras se prepara la comida y se ordena)",
-                "Duracion_min": 40,
-                "Duracion_max": 50
-            },
-            {
-                "Tipo": "Entrega de la comida",
-                "Duracion_min": 2,
-                "Duracion_max": 4
-            },
-            {
-                "Tipo": "Sale de fila",
-                "Duracion_min": 1,
-                "Duracion_max": 1
-            }
-        ],
-        
-        "TiempoSimulacion": [
-            {
-                "Unidad": "minutos",
-                "RelacionReal": 0.016666666666666666
-            }
-        ]
+    "Postres": [ "Helado simple","Helado doble","Batido de fresa"],
+    "ComidaPesada": ["Hamburguesa", "Taco", "Burrito", "Hot dog"],
+    "Extra": ["Papas grandes", "Nombre", "Pure", "Papas medianas", "Platanos"],
+    "Bebida": [ "Coca", "Fanta", "Te frio", "7Up"],
     
+    "Tiempos": [
+        {
+            "Tipo": "Haciendo fila",
+            "Duracion_min": 5,
+            "Duracion_max": 10
+        },
+        {
+            "Tipo": "Solicitando la orden",
+            "Duracion_min": 20,
+            "Duracion_max": 30
+        },
+        {
+            "Tipo": "En espera (mientras se prepara la comida y se ordena)",
+            "Duracion_min": 40,
+            "Duracion_max": 50
+        },
+        {
+            "Tipo": "Entrega de la comida",
+            "Duracion_min": 2,
+            "Duracion_max": 4
+        },
+        {
+            "Tipo": "Sale de fila",
+            "Duracion_min": 1,
+            "Duracion_max": 1
+        }
+    ],
+    
+    "Simulacion": 
+        {
+            "Unidad": "minutos",
+            "RelacionReal": 0.016666666666666666,
+            "ventanillas" : 6
+        }
 }

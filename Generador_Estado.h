@@ -1,7 +1,7 @@
 #ifndef generador 
 #include <string>
 #include <iostream>
-#include "Estado.h"
+#include "estado.h"
 
 using namespace std;
 

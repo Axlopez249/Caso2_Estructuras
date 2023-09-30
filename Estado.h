@@ -5,7 +5,7 @@
 
 using namespace std;
 
-class Estado {
+class estado {
     private:
         string tipo;
         int min;

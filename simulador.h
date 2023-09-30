@@ -26,12 +26,8 @@ using namespace std;
 class simulador
 {
 private:
-    // Queue<string> *colaCarros;
-    // Stack<string> *pila;
-    // List<string> *lista = new List<string>();
     List<ventanillaS *> *ventanillas;
     ConfigSimulacion config;
-    // int cantidadVentanillas;
     int cantidadCarros;
     int carrosInvertalo;
 
@@ -41,18 +37,8 @@ public:
         config = pConfig.getConfigSimulacion();
         ventanillas = new List<ventanillaS>();
 
-        // recorrer la cantidad de ventanillas y crearlas
-        // for por cantidad de ventanillas (
-        // nueva = new ventanillaS(pConfig->,,,);
-        // nueva.setRestaurant();
-        //     ventanillas->add(nueva)
-        //
-        //)
-
-        // aqui creo el hilo que va a generar los carros y le hago start
     }
 
-    // esto va a ser thread
     void generar_carros()
     {
         // Se generan carros para la simulacion en forma infinita

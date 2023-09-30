@@ -3,6 +3,8 @@
 #include <string>
 #include <iostream>
 
+
+
 using namespace std;
 
 class estado {
@@ -12,9 +14,10 @@ class estado {
         int max;
         bool used = false;
 
+
     public:
-        Estado(string tipo,int min,int max){
-            //Se le asigna el id al veh
+        Estado(string pTipo, int pMin, int pMax, bool pUsed){
+            //Se estructura el estado
         }
 
         int get_tipo(){

@@ -7,11 +7,10 @@ using namespace std;
 
 class reseta {
     private:
-        vector<string> refrescos;
-        vector<string> platosFuerte;
-        vector<string> platosSuave;
-        vector<strign> postres;
-        vector<string> ingredientes;
+        vector<string> bebida;
+        vector<string> comidaPesada;
+        vector<string> extra;
+        vector<strign> postre;
     public:
         Reseta(){
             //Se crea la receta
@@ -23,25 +22,21 @@ class reseta {
         }
 
 
-        vector<string> getplatosFuerte(){
+        vector<string> getComidaPesada(){
             //return platosFuerte
         }
 
-        vector<string> getplatosSuave(){
+        vector<string> getPostre(){
             //return platosSuave
         }
 
-        vector<string> getpostres(){
+        vector<string> getExtra(){
             //return postres
         }
 
-        vector<string> getrefrescos(){
+        vector<string> getBebida(){
             //return refrescos
         }
-
-
-
-
 
     
 };

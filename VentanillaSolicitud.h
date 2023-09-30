@@ -44,5 +44,6 @@ public:
 
     void setRestaurant(Restaurant *current)
     {
+        //Se crea un unico restaurante
     }
 };

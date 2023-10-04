@@ -150,6 +150,36 @@ class List : public Stack<T>, public Queue<T> {
             }
         }
 
+        configTiempo* searchValue(string valor) {
+            Node<T>* current = this->first;
+            while (current != nullptr) {
+                configTiempo* objeto = current->getData();
+                if (objeto->tipo == valor) {
+                    return objeto;
+                }
+                current = current->getNext();
+            }
+            return nullptr; // Retorna nullptr si no se encuentra el valor
+        }
+
+
+        //esta funcion toma un valor aleatorio 1-4 y va recorriendo desde 0 
+        string getDataRandom(int contador) {
+            Node<T>* current = this->first;
+            int contadorLocal = 0;
+
+            while (current != nullptr) {
+                if (contador == contadorLocal) {
+                    return *(current->getData());
+                }
+                contadorLocal++;
+                current = current->getNext();
+            }
+            return ""; // Retorna una cadena vacía si el contador es mayor que el tamaño de la lista
+        }
+
+
+
         void push(T* pValue) {
             insert(0, pValue);
         }

@@ -11,15 +11,16 @@ class orden
 {
 private:
     Carro *carro;
+
     int number;
-    List<string> *comidapesada;
-    List<string> *bebida;
-    List<string> *postre;
-    List<string> *extra;
+    string comida;
+    string bebida;
+    string postre;
+    string extra;
     // estado de orden
 
 public:
-    List<string> order(Carro *pCarro, int pNumero, List<string> *pPostre, List<string> *pBebida, List<string> *pExtra, List<string> *pComidaPesada ){
+    List<string> order(Carro *pCarro, string comida, string bebida, string postre, string extra){
         //Se crea una orden
     }
 

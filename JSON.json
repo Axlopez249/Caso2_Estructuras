@@ -9,9 +9,9 @@
         }
     ],
 
-    "Postres": [ "Helado simple","Helado doble","Batido de fresa"],
+    "Postres": [ "Helado simple","Helado doble","Batido de fresa", "Helado especial"],
     "ComidaPesada": ["Hamburguesa", "Taco", "Burrito", "Hot dog"],
-    "Extra": ["Papas grandes", "Nombre", "Pure", "Papas medianas", "Platanos"],
+    "Extra": ["Papas grandes", "Pure", "Papas medianas", "Platanos"],
     "Bebida": [ "Coca", "Fanta", "Te frio", "7Up"],
     
     "Tiempos": [
@@ -26,7 +26,7 @@
             "Duracion_max": 4
         },
         {
-            "Tipo": "En espera (mientras se prepara la comida y se ordena)",
+            "Tipo": "En espera",
             "Duracion_min": 3,
             "Duracion_max": 6
         },

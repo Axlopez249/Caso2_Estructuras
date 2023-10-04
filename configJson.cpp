@@ -18,6 +18,7 @@ struct ConfigGeneradorCarros
     int intervalo;
     int tiempoMin;
     int tiempoMax;
+    int id = 0;
 };
 
 struct configTiempo

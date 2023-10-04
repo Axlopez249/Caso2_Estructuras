@@ -2,20 +2,19 @@
 #define carro
 #include <string>
 #include <iostream>
+#include "configJson.h"
 
 using namespace std;
 
-class carro {
+class Carro {
     private:
         int id;
 
     public:
-        Carro(){
-            //Se le asigna el id al veh
-        }
+        Carro(int pId): id(pId){}
 
         int get_id(){
-            // return nom
+            return id;
         }
     
 };

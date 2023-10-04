@@ -33,6 +33,7 @@ private:
     int cantidadCarros;
     int carrosInvertalo;
 
+
 public:
     Simulador(ConfigJson *pConfig, Restaurant *currentRestaurant)
     {
@@ -41,17 +42,16 @@ public:
         ventanillas = new List<ventanillaS>();
 
         // recorrer la cantidad de ventanillas y crearlas
-        // for por cantidad de ventanillas (
-        // nueva = new ventanillaS(pConfig->,,,);
-        // nueva.setRestaurant();
-        //     ventanillas->add(nueva)
-        //
-        //)
+        for (int i = 0; i < config.ventanillas; i++) {
+        vNueva = new ventanillaS();
+        vNueva.setRestaurant();
+        ventanillas->add(vNueva)
+        }
 
         // aqui creo el hilo que va a generar los carros y le hago start
         for (int i = 0; i < config.ventanillas; i++)
         {
-            ventanillaS nueva_ventanilla = new ventanillaS(pconfig.getcomidasPesadas(), config.getBebidas(), config.getpostres(),
+            ventanillaS nueva_ventanilla = new gen_ventanilla(i,config.getcomidasPesadas(), config.getBebidas(), config.getpostres(),
              config.getextras(), configCarros.min, configCarros.max);
             nueva_ventanilla.setRestaurant(currentRestaurant);
             ventanillas->add(nueva_ventanilla);
@@ -62,31 +62,22 @@ public:
         
     }
 
-    void generar_carros()
-    {
-        while (true)
-        {
+
+
+    void generar_carros(int pVentanilla){
+        int carroID = 1;
+        while (true){
             //Se generan carros de forma infinita cada un intervalo de tiempo que se transforma a milisegundo
-            for (int i = 0; i <= configCarros.cantidad; i++)
-            {
-                carro *carro = new carro();
-                //Aqui se continua pero no tengo muy clara la idea
-
+            for (int i = 0; i <= configCarros.cantidad; i++){
+                Carro *carro = new carro(carroID++);
+                int ventanillaID = carroID % config.ventanillas;
+                //Ingeso a las colas de ventanillas
+                if (ventanillaID >= 0 && ventanillaID <config.ventanillas){
+                    ventanillas[ventanillaID].addCarro(carro);
+                }
             }
-            std::this_thread::sleep_for(std::chrono::milliseconds(configCarros.intervalo*60*1000));
-            
+            std::this_thread::sleep_for(std::chrono::milliseconds(configCarros.intervalo*60*1000)); 
         }
-        
-        // Se generan carros para la simulacion en forma infinita
-        // Se van metiendo cada carro ventanilla por ventanilla
-    }
-
-    void ingreso_ventanilla(Queue<string[]> *pColaCarros, Queue<string[]> *pColaCarros2)
-    {
-        // Se ingresan los carros a la ventanilla
-        // Aqui voy tomando las colas de lo carros que van ingresando
-        // Voy asignandoles una orden para pasarlos al restaurante
-        // El carro pasa a cola de espera mientras se prepara la comida
     }
 
     void ingreso_restaurant(vector<string> orden)

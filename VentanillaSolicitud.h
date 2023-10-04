@@ -11,18 +11,25 @@ class ventanillaS
 {
 private:
     Queue<Carro *> *carrosEsperando;
-    List<string> *bebidas;
-    List<string> *comidasPesadas;
-    List<string> *postres;
-    List<string> *extras;
+    vector<string> comidasPesadas_;
+    vector<string> bebidas_;
+    vector<string> postres_;
+    vector<string> extras_;
+    int tMin_;
+    int tMax_;
+    int idVent;
     Restaurant *currentRestaurant;
 
     int id_carro;
     int id_orden; // Los nombres de las recetas son un string no un int
 public:
-    ventanillaS(List<string> *pcomidas, List<string> *prefrescos, List<String> *postres, List<String> *extras, int minTiempoEnFila, int maxTimpoEnFila)
-    {
-        // arrancar el hilo de procesamiento
+    gen_ventanilla(int pId, const vector<string>& comidasPesadas,as, const vector<string>& bebidas, 
+    const vector<string>& postres, const vector<string>& extras, int tMin, int tMax, 
+    extras, int tMin, int tMax):idVent_(pId), comidasPesadas_(comidasPesadas), bebidas_(bebidas), postres_(postres), extras_(extras), tMin_(tMin), tMax_(tMax) {
+    }
+
+    
+    void ordenHilo(){
         std::thread miHilo(procesarOrden);
         miHilo.join();
     }

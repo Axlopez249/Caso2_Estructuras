@@ -2,32 +2,12 @@
 #include <fstream>
 #include <iostream>
 #include "lista.h"
+#include "ConfigSimulacion.h"
+#include "ConfigGeneradorCarros.h"
+#include "configTiempo.h"
+
 
 using json = nlohmann::json;
-
-struct ConfigSimulacion
-{
-    string Unidad;
-    float RelacionReal;
-    int ventanillas;
-};
-
-struct ConfigGeneradorCarros
-{
-    int cantidad;
-    int intervalo;
-    int tiempoMin;
-    int tiempoMax;
-    int id = 0;
-};
-
-struct configTiempo
-{
-    string tipo;
-    int min;
-    int max;
-};
-
 
 class ConfigJson
 {
@@ -45,7 +25,8 @@ private:
     void parseAllJson()
     {
         // cargar todo en estructuras
-        tiempos = new List<string>();
+        //tiempos = new List<string>(); //Esto da error porque crea dos listas de tipo diferente con el mismo nombre
+        //y no creo que esta lista tipo string sea necesaria
 
         std::ifstream file("JSON.json"); // Abre el archivo JSON
         if (file.is_open()) {
@@ -57,12 +38,12 @@ private:
                 json jsonData = json::parse(jsonStr);
 
                 // Acceder a los elementos del JSON
-                for (const auto& tiempo: jsonData["Tiempos"])
+                for (const auto& pTiempo: jsonData["Tiempos"])
                 {
                     configTiempo tiempo;
-                    tiempo.tipo = tiempo["Tipo"];
-                    tiempo.min = tiempo["Duracion_min"];
-                    tiempo.max = tiempo["Duracion_max"];
+                    tiempo.tipo = pTiempo["Tipo"];
+                    tiempo.min = pTiempo["Duracion_min"];
+                    tiempo.max = pTiempo["Duracion_max"];
                     tiempos->add(&tiempo);
                 }
 
@@ -78,8 +59,8 @@ private:
                 //Para sacar el configsimulacion
                 for (const auto& simu : jsonData["Simulacion"]) 
                 {
-                    currentConfigSimulacion.Unidad = simu["Unidad"]
-                    currentConfigSimulacion.RelacionReal = simu["RelacionReal"]
+                    currentConfigSimulacion.Unidad = simu["Unidad"];
+                    currentConfigSimulacion.RelacionReal = simu["RelacionReal"];
                     currentConfigSimulacion.ventanillas = generador["ventanillas"];
 
                 }

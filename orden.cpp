@@ -10,7 +10,7 @@ using namespace std;
 class orden
 {
 private:
-    Carro *carro;
+    Carro *carro
 
     int number;
     string comida;

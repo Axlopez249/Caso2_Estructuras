@@ -2,7 +2,7 @@
 #define carro
 #include <string>
 #include <iostream>
-#include "configJson.h"
+#include "configJson.cpp"
 
 using namespace std;
 

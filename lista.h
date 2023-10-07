@@ -149,8 +149,10 @@ class List : public Stack<T>, public Queue<T> {
                 current = current->getNext();
             }
         }
+        
 
-        configTiempo* searchValue(string valor) {
+        // esta funcion tiene error de tipo
+        configTiempo searchValue(string valor) {
             Node<T>* current = this->first;
             while (current != nullptr) {
                 configTiempo* objeto = current->getData();

@@ -37,8 +37,14 @@ private:
 
     int cantidadCarros;
     int carrosInvertalo;
+    List<string> *bebidas;
+    List<string> *comidasPesadas;
+    List<string> *postres;
+    List<string> *extras; 
 
-
+    List<string> *stack = new List<string>;
+    Stack<string> *pilaBolsa = stack;
+    
 public:
     Simulador(ConfigJson *pConfig, Restaurant *currentRestaurant)
     {
@@ -63,8 +69,6 @@ public:
             vNueva.setRestaurant();
             ventanillas->add(vNueva);
         }
-
-        
 
         // aqui creo el hilo que va a generar los carros y le hago start
         for (int i = 0; i < config.ventanillas; i++)
@@ -101,10 +105,40 @@ public:
 
     void ingreso_restaurant(vector<string> orden)
     {
-        // Aqui se toma cada cosa de la orden y se va apilando segun un orden que tiene el restaurante
-        // Se toma en cuenta el tiempo del estado que viene en las reglas del json con un numero random
-        // Despues de apilado todo y teniendo el id del carro se busca en la cola de espera y se le hace dequeue
-        // colocando el ultimo estado como true y llevando su comida apilada
+        ConfigJson comidas;
+        bebidas = comidas.getBebidas();
+        comidasPesadas = comidas.getcomidasPesadas();
+        postres = comidas.getpostres();
+        extras = comidas.getextras();
+        
+        //For para agregar las comidas pesadas
+        for (const string& comida : orden){
+            if (find(comidasPesadas.begin(), comidasPesadas.end(), comida) != comidasPesadas.end()) {
+                pilaBolsa.push(comida);
+            }
+        }
+
+        //For para agregar los extras        
+        for (const string& comida : orden){
+            if (find(extras.begin(), extras.end(), comida) != extras.end()){
+                pilaBolsa->push(comida);
+            }
+            
+        }
+        
+        //For para agregar los postres
+        for (const string& comida : orden){
+            if (find(postres.begin(), postres.end(), comida) != postres.end()){
+                pilaBolsa->push(comida);
+            }
+        }
+
+        //For para agregar las bebidas
+        for (const string& comida : orden){
+            if (find(bebidas.begin(), bebidas.end(), comida) != bebidas.end()){
+                pilaBolsa->push(comida);
+            }
+        }
     }
 
     void tiempo_ventanilla(vector<Carro> &pCarro)

@@ -1,8 +1,8 @@
-#ifndef carro 
-#define carro
+#ifndef _CARRO_  
+#define _CARRO_ 1
 #include <string>
 #include <iostream>
-#include "configJson.cpp"
+
 
 using namespace std;
 
@@ -11,7 +11,9 @@ class Carro {
         int id;
 
     public:
-        Carro(int pId): id(pId){}
+        Carro(int pId){
+            id = pId;
+        }
 
         int get_id(){
             return id;

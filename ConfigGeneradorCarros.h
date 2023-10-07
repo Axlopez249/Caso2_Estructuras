@@ -1,5 +1,6 @@
 #ifndef ConfigGeneradorCarros_
-#define ConfigGeneradorCarros_
+#define ConfigGeneradorCarros_ 
+#include <string>
 
 struct ConfigGeneradorCarros //aca dice error por redefinicion pero no se por que
 {

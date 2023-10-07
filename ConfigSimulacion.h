@@ -11,4 +11,5 @@ struct ConfigSimulacion //aca dice error por redefinicion pero no se por que
     int ventanillas;
 };
 
+
 #endif

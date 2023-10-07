@@ -1,5 +1,6 @@
 #include "Node.h"
 #include "stack.h"
+#include "configTiempo.h"
 #include "queue.h"
 #include <unordered_map>
 
@@ -152,7 +153,7 @@ class List : public Stack<T>, public Queue<T> {
         
 
         // esta funcion tiene error de tipo
-        configTiempo searchValue(string valor) {
+        configTiempo* searchValue(string valor) {
             Node<T>* current = this->first;
             while (current != nullptr) {
                 configTiempo* objeto = current->getData();
@@ -161,7 +162,6 @@ class List : public Stack<T>, public Queue<T> {
                 }
                 current = current->getNext();
             }
-            return nullptr; // Retorna nullptr si no se encuentra el valor
         }
 
 

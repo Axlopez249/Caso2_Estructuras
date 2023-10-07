@@ -1,3 +1,6 @@
+#ifndef CONFIGJSON
+#define CONFIGJSON 1
+
 #include "json.hpp"
 #include <fstream>
 #include <iostream>
@@ -61,7 +64,7 @@ private:
                 {
                     currentConfigSimulacion.Unidad = simu["Unidad"];
                     currentConfigSimulacion.RelacionReal = simu["RelacionReal"];
-                    currentConfigSimulacion.ventanillas = generador["ventanillas"];
+                    currentConfigSimulacion.ventanillas = simu["ventanillas"];
 
                 }
 
@@ -164,5 +167,7 @@ public:
         return currentConfigGeneradorCarros.tiempoMax;
     }
 
-    //.. and so on
+    
 };
+
+#endif

@@ -1,18 +1,22 @@
 #include <iostream>
 #include <string>
 #include "lista.h"
-#include "orden.cpp"
+#include "orden.h"
 #include "restaurant.h"
 #include "carro.h"
 #include "queue.h"
 #include <random>
+
+#include <thread>
+#include <chrono>
+#include <functional>
 
 using namespace std;
 
 class ventanillaS
 {
 private:
-    Queue<Carro *> *carrosEsperando;
+    Queue<Carro> *carrosEsperando;
     List<string> *bebidas;
     List<string> *comidasPesadas;
     List<string> *postres;
@@ -26,11 +30,11 @@ private:
     int id_carro;
     int id_orden; // Los nombres de las recetas son un string no un int
 public:
-    ventanillaS (int pideVent, List<string> * pcomidas , List<string> * prefrescos ,
-     List<String> *ppostres , List<String> *pextras , int minTiempoEnFila, int maxTimpoEnFila) {
+    ventanillaS (int pideVent, List<string> * pcomidas , List<string> *prefrescos ,
+     List<string> *ppostres , List<string> *pextras , int minTiempoEnFila, int maxTimpoEnFila) {
     
         idVent = pideVent;
-        refrescos = prefrescos;
+        bebidas = prefrescos;
         comidasPesadas = pcomidas;
         postres = ppostres;
         extras = pextras;
@@ -38,8 +42,8 @@ public:
         tMax_ = maxTimpoEnFila;
 
 
-        std::thread miHilo(procesarOrden);
-        miHilo.join();
+        std::thread miHilo(&ventanillaS::procesarOrden, this);
+        miHilo.detach();
     }
 
     void addCarro(Carro *pNewCarro)
@@ -76,7 +80,7 @@ public:
             string extra_orden = comidasPesadas->getDataRandom(extra);
             string postre_orden = comidasPesadas->getDataRandom(postre);
 
-            orden *ordenNueva = new orden(carro_nuevo, comida, bebida, postre, extra);
+            orden *ordenNueva = new orden(carro_nuevo, comida_orden, bebida_orden, postre_orden, extra_orden);
             currentRestaurant->addOrder(ordenNueva);
 
             //Se saca random para para realizar cada cierto tiempo

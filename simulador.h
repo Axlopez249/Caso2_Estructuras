@@ -1,3 +1,6 @@
+#ifndef _SIMULADOR_
+#define _SIMULADOR_ 1
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -15,11 +18,13 @@
 #include "queue.h"
 #include "stack.h"
 #include "configJson.cpp"
-
+#include "ConfigGeneradorCarros.h"
+#include "ConfigSimulacion.h"
+#include "configTiempo.h"
+#include "restaurant.h"
 #include "json.hpp"
-
 #include "carro.h"
-//#include "reseta.h"
+
 #include "ventanillaSolicitud.h"
 
 using namespace std;
@@ -28,30 +33,26 @@ class simulador
 {
 private:
     List<configTiempo> * lista_tiempos;
-    List<ventanillaS *> *ventanillas;
+    List<ventanillaS > *ventanillas;
     ConfigSimulacion config;
     ConfigGeneradorCarros configCarros;
-    
-    
-
-
     int cantidadCarros;
     int carrosInvertalo;
     List<string> *bebidas;
     List<string> *comidasPesadas;
     List<string> *postres;
     List<string> *extras; 
-
     List<string> *stack = new List<string>;
     Stack<string> *pilaBolsa = stack;
     
 public:
-    Simulador(ConfigJson *pConfig, Restaurant *currentRestaurant)
+    simulador(ConfigJson *pConfig, Restaurant *currentRestaurant)
     {
-        config = pconfig.getConfigSimulacion();
-        configCarros = config.getConfigCarros();
+        config = pConfig->getConfigSimulacion();
+        configCarros = pConfig->getConfigCarros();
         ventanillas = new List<ventanillaS>();
-        lista_tiempos = pConfig.getConfigTiempo();
+        lista_tiempos = pConfig->getConfigTiempo();
+        
 
         //LLamo esta funcion para saber cual es el tiempo que debo extraer para crear las ventanillas
         configTiempo *tiempoVentanilla = lista_tiempos->searchValue("Haciendo fila");
@@ -62,20 +63,12 @@ public:
         currentRestaurant->setMax(tiempoRestaurant->max);
         currentRestaurant->setMin(tiempoRestaurant->min);
 
-
-        // recorrer la cantidad de ventanillas y crearlas
-        for (int i = 0; i < config.ventanillas; i++) {
-            vNueva = new ventanillaS();
-            vNueva.setRestaurant();
-            ventanillas->add(vNueva);
-        }
-
         // aqui creo el hilo que va a generar los carros y le hago start
         for (int i = 0; i < config.ventanillas; i++)
         {
-            ventanillaS nueva_ventanilla = new gen_ventanilla(i,config.getcomidasPesadas(), config.getBebidas(), config.getpostres(),
-             config.getextras(), tiempoVentanilla.min, tiempoVentanilla.max);
-            nueva_ventanilla.setRestaurant(currentRestaurant);
+            ventanillaS *nueva_ventanilla = new ventanillaS(i,pConfig->getcomidasPesadas(), pConfig->getBebidas(), pConfig->getpostres(),
+             pConfig->getextras(), tiempoVentanilla->min, tiempoVentanilla->max);
+            nueva_ventanilla->setRestaurant(currentRestaurant);
             ventanillas->add(nueva_ventanilla);
         }
 
@@ -146,3 +139,5 @@ public:
         // Se toma el tiempo de atencion de cada carro
     }
 };
+
+#endif

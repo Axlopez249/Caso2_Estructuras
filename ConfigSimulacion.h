@@ -1,5 +1,5 @@
-#ifndef ConfigSimulacion_
-#define ConfigSimulacion_
+#ifndef _CONFIGSIMULACION_ 
+#define _CONFIGSIMULACION_ 1
 
 #include <string>
 

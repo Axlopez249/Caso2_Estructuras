@@ -1,9 +1,9 @@
-#include <iostream>
+
 
 #ifndef NODE 
 
 #define NODE 1
-
+#include <iostream>
 using namespace std;
 
 template <class T>

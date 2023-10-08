@@ -1,16 +1,20 @@
+#ifndef _VENTANILLASOLICITUD_
+#define _VENTANILLASOLICITUD_ 1
+
 #include <iostream>
 #include <string>
 #include "lista.h"
-#include "orden.h"
-#include "restaurant.h"
-#include "carro.h"
 #include "queue.h"
+#include "orden.h"
+
+#include "carro.h"
+
 #include <random>
 
 #include <thread>
 #include <chrono>
 #include <functional>
-
+#include "restaurant.h"
 using namespace std;
 
 class ventanillaS
@@ -40,7 +44,7 @@ public:
         extras = pextras;
         tMin_ = minTiempoEnFila;
         tMax_ = maxTimpoEnFila;
-
+        
 
         std::thread miHilo(&ventanillaS::procesarOrden, this);
         miHilo.detach();
@@ -105,3 +109,5 @@ public:
         currentRestaurant = current;
     }
 };
+
+#endif

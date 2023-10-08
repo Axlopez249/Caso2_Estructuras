@@ -1,13 +1,21 @@
+
+#ifndef _LIST_ 
+
+#define _LIST_ 1
+
+
 #include "Node.h"
 #include "stack.h"
-#include "configTiempo.h"
 #include "queue.h"
+#include "VentanillaSolicitud.h"
+#include "configTiempo.h"
+
 #include "carro.h"
+
 #include <unordered_map>
 
-#ifndef LIST 
 
-#define LIST 1
+
 
 using namespace std;
 
@@ -181,14 +189,18 @@ class List : public Stack<T>, public Queue<T> {
             return ""; // Retorna una cadena vacía si el contador es mayor que el tamaño de la lista
         }
 
-        void insertCarroVentanilla(int entero, Carro carro) {
+        void insertCarroVentanilla(int entero, Carro *carro) {
             Node<T>* current = this->first;
             int contadorLocal = 0;
 
             while (current != nullptr) {
                 if (entero == contadorLocal) {
                     //Se inserta en el nodo el carro
-                    current->setData(carro);
+                    ventanillaS *ventanilla;
+                    
+                    ventanilla = current->getData();
+                    ventanilla->addCarro(carro);
+                    return;
                 }
                 contadorLocal++;
                 current = current->getNext();
@@ -225,6 +237,13 @@ class List : public Stack<T>, public Queue<T> {
             return result;
         }
 
+        Node<T>* begin(){
+            return this->first;
+        }
+
+        Node<T>* end(){
+            return nullptr;
+        }
 };
 
 #endif

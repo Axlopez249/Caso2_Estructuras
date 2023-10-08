@@ -21,7 +21,9 @@ class Restaurant
 private:
     vector<string> ingredientes_orden;
     vector<string> orden_orden; // este es el orden de las ordenes
-    Queue<orden> *ordenesacocinar;
+    Queue<orden> *ordenesacocinar;  //Esta vara da error 
+    
+    
     int min;
     int max;
 

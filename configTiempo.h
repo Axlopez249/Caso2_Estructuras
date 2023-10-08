@@ -1,5 +1,5 @@
-#ifndef configTiempo_
-#define configTiempo_
+#ifndef _CONFIGTIEMPO_
+#define _CONFIGTIEMPO_ 1
 
 #include <string>
 

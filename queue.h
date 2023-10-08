@@ -1,5 +1,5 @@
-#ifndef cola 
-#define cola 1
+#ifndef _COLA_ 
+#define _COLA_ 1
 
 template <typename T>
 class Queue {

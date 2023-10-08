@@ -1,5 +1,5 @@
-#ifndef ConfigGeneradorCarros_
-#define ConfigGeneradorCarros_ 
+#ifndef _CONFIGGENERADORCARROS_
+#define _CONFIGGENERADORCARROS_ 1
 #include <string>
 
 struct ConfigGeneradorCarros 

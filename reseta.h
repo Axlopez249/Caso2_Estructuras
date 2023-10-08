@@ -1,5 +1,5 @@
-#ifndef reseta 
-#define cant 3
+#ifndef _RESETA_ 
+#define _RESETA_ 1
 #include <string>
 #include <iostream>
 

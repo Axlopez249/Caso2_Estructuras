@@ -44,14 +44,17 @@ private:
     List<string> *extras; 
     List<string> *stack = new List<string>;
     Stack<string> *pilaBolsa = stack;
+
+    Queue<Carro> *colaCarro;
     
 public:
-    simulador(ConfigJson *pConfig, Restaurant *currentRestaurant, List<Carro> colaEsperaCarro)
+    simulador(ConfigJson *pConfig, Restaurant *currentRestaurant)
     {
         config = pConfig->getConfigSimulacion();
         configCarros = pConfig->getConfigCarros();
         ventanillas = new List<ventanillaS>();
         lista_tiempos = pConfig->getConfigTiempo();
+        
         
 
         //LLamo esta funcion para saber cual es el tiempo que debo extraer para crear las ventanillas
@@ -66,44 +69,46 @@ public:
         // aqui creo el hilo que va a generar los carros y le hago start
         for (int i = 0; i < config.ventanillas; i++)
         {
-            ventanillaS *nueva_ventanilla = new ventanillaS(i,pConfig->getcomidasPesadas(), pConfig->getBebidas(), pConfig->getpostres(),
+            ventanillaS *nueva_ventanilla = new ventanillaS::ventanillaS(i,pConfig->getcomidasPesadas(), pConfig->getBebidas(), pConfig->getpostres(),
              pConfig->getextras(), tiempoVentanilla->min, tiempoVentanilla->max);
             nueva_ventanilla->setRestaurant(currentRestaurant);
             ventanillas->add(nueva_ventanilla);
         }
 
-        std::thread miHilo(&simulador::generar_carros, this, colaEsperaCarro);
+        std::thread miHilo(&simulador::generar_carros, this);
         miHilo.join();
         
     }
 
 
 
-    void generar_carros(List<Carro> colaEsperaCarros){
+    void generar_carros(){
         int carroID = 1;
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(configCarros.intervalo*60*1000)); 
-        while (carroID >= configCarros.cantidad){
+         
+        while (true){//carroID >= configCarros.cantidad Esta vara creo que nunca se cumple porque carroId inicia en 1 y nunca va a ser mayor a los 100 carros
 
             //Se generan carros de forma infinita cada un intervalo de tiempo que se transforma a milisegundo
             for (int i = 0; i <= configCarros.cantidad; i++){
                 Carro *carro = new Carro(carroID++);
-                colaEsperaCarros.enqueue(*carro);
+                colaCarro->enqueue(*carro);
 
             }
+            std::this_thread::sleep_for(std::chrono::milliseconds(configCarros.intervalo*60*1000));
         }
     }
 
-    void ingreso_ventanilla(List<string> colaEsperaCarros){
+    void ingreso_ventanilla(){
 
         ConfigSimulacion vent;
         int cont = 0;
 
-        while (cont >= vent.ventanillas){
-            Carro carro = colaEsperaCarros.dequeue();
+        while (true){
+            Carro *carro = colaCarro->dequeue();
             //Se llama a la funcion insertar 
             ventanillas->insertCarroVentanilla(cont, carro);
             cont++;
+            if (cont== 5){cont = 0;}
         }
 
     }
@@ -118,30 +123,30 @@ public:
         
         //For para agregar las comidas pesadas
         for (const string& comida : orden){
-            if (find(comidasPesadas.begin(), comidasPesadas.end(), comida) != comidasPesadas.end()) {
-                pilaBolsa.push(*comida);
+            if (find(comidasPesadas->begin(), comidasPesadas->end(), comida) != comidasPesadas->end()) {
+                pilaBolsa->push(comida);
             }
         }
 
         //For para agregar los extras        
         for (const string& comida : orden){
-            if (find(extras.begin(), extras.end(), comida) != extras.end()){
-                pilaBolsa->push(*comida);
+            if (find(extras->begin(), extras->end(), comida) != extras->end()){
+                pilaBolsa->push(comida);
             }
             
         }
         
         //For para agregar los postres
         for (const string& comida : orden){
-            if (find(postres.begin(), postres.end(), comida) != postres.end()){
-                pilaBolsa->push(*comida);
+            if (find(postres->begin(), postres->end(), comida) != postres->end()){
+                pilaBolsa->push(comida);
             }
         }
 
         //For para agregar las bebidas
         for (const string& comida : orden){
-            if (find(bebidas.begin(), bebidas.end(), comida) != bebidas.end()){
-                pilaBolsa->push(*comida);
+            if (find(bebidas->begin(), bebidas->end(), comida) != bebidas->end()){
+                pilaBolsa->push(comida);
             }
         }
     }

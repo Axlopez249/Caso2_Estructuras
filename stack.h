@@ -1,5 +1,5 @@
-#ifndef pila 
-#define pila 1
+#ifndef _PILA_ 
+#define _PILA_ 1
 
 
 template <typename T>

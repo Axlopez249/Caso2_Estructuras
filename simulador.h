@@ -54,6 +54,7 @@ public:
         configCarros = pConfig->getConfigCarros();
         ventanillas = new List<ventanillaS>();
         lista_tiempos = pConfig->getConfigTiempo();
+        colaCarro = colaEsperaCarro;
         
         
 
@@ -91,6 +92,7 @@ public:
             //Se generan carros de forma infinita cada un intervalo de tiempo que se transforma a milisegundo
             for (int i = 0; i <= configCarros.cantidad; i++){
                 Carro *carro = new Carro(carroID++);
+
                 colaCarro->enqueue(*carro);
 
             }
@@ -104,7 +106,10 @@ public:
         int cont = 0;
 
         while (true){
+
             Carro *carro = colaCarro->dequeue();
+
+
             //Se llama a la funcion insertar 
             ventanillas->insertCarroVentanilla(cont, carro);
             cont++;

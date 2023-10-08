@@ -199,6 +199,8 @@ class List : public Stack<T>, public Queue<T> {
                     ventanillaS *ventanilla;
                     
                     ventanilla = current->getData();
+
+
                     ventanilla->addCarro(carro);
                     return;
                 }

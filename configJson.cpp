@@ -4,6 +4,7 @@
 #include "json.hpp"
 #include <fstream>
 #include <iostream>
+#include <string>
 #include "lista.h"
 #include "ConfigSimulacion.h"
 #include "ConfigGeneradorCarros.h"
@@ -11,84 +12,33 @@
 
 
 using json = nlohmann::json;
+using namespace std;
 
 class ConfigJson
 {
 private:
-    ConfigSimulacion currentConfigSimulacion;
-    ConfigGeneradorCarros currentConfigGeneradorCarros;
 
+    
+    ConfigGeneradorCarros currentConfigGeneradorCarros;
+    ConfigSimulacion currentConfigSimulacion;
     List<string> *bebidas;
     List<string> *comidasPesadas;
     List<string> *postres;
     List<string> *extras;
 
-    List<configTiempo> *tiempos;
+    List<configTiempo> *tiempos = new List<configTiempo>();
 
-    void parseAllJson()
-    {
-        // cargar todo en estructuras
-        //tiempos = new List<string>(); //Esto da error porque crea dos listas de tipo diferente con el mismo nombre
-        //y no creo que esta lista tipo string sea necesaria
-
-        std::ifstream file("JSON.json"); // Abre el archivo JSON
-        if (file.is_open()) {
-            try {
-                // Lee el contenido del archivo en un string
-                std::string jsonStr((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
-
-                // Parsea el string JSON
-                json jsonData = json::parse(jsonStr);
-
-                // Acceder a los elementos del JSON
-                for (const auto& pTiempo: jsonData["Tiempos"])
-                {
-                    configTiempo tiempo;
-                    tiempo.tipo = pTiempo["Tipo"];
-                    tiempo.min = pTiempo["Duracion_min"];
-                    tiempo.max = pTiempo["Duracion_max"];
-                    tiempos->add(&tiempo);
-                }
-
-                //sacar para generarcarros
-                for (const auto& generador : jsonData["GeneradorCarros"]) 
-                {
-                    currentConfigGeneradorCarros.cantidad = generador["Cantidad"];
-                    currentConfigGeneradorCarros.intervalo = generador["interval"];
-                    currentConfigGeneradorCarros.tiempoMax = generador["TiempoMax"];
-                    currentConfigGeneradorCarros.tiempoMin = generador["TiempoMin"];
-                }
-
-                //Para sacar el configsimulacion
-                for (const auto& simu : jsonData["Simulacion"]) 
-                {
-                    currentConfigSimulacion.Unidad = simu["Unidad"];
-                    currentConfigSimulacion.RelacionReal = simu["RelacionReal"];
-                    currentConfigSimulacion.ventanillas = simu["ventanillas"];
-
-                }
-
-            } catch (const std::exception& e) {
-                std::cerr << "Error: " << e.what() << std::endl;
-            }
-
-            file.close(); // Cierra el archivo después de usarlo
-        } else {
-            std::cerr << "No se pudo abrir el archivo." << std::endl;
-        }
-        
-    }
+    
 
 public:
     ConfigJson()
     {
-
         // cargar el json al objecto
         // inicializo las listas
         bebidas = new List<string>();
-        comidasPesadas = new List<string>();
         postres = new List<string>();
         extras = new List<string>();
+        comidasPesadas = new List<string>(); 
 
         //comienzo a extraer  la info del json
         std::ifstream file("JSON.json"); // Abre el archivo JSON
@@ -122,6 +72,54 @@ public:
         }
 
         parseAllJson();
+    }
+
+    void parseAllJson()
+    {
+        // cargar todo en estructuras
+        //tiempos = new List<string>(); //Esto da error porque crea dos listas de tipo diferente con el mismo nombre
+        //y no creo que esta lista tipo string sea necesaria
+
+        std::ifstream file("JSON.json"); // Abre el archivo JSON
+        if (file.is_open()) {
+            try {
+                // Lee el contenido del archivo en un string
+                std::string jsonStr((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+
+                // Parsea el string JSON
+                json jsonData = json::parse(jsonStr);
+
+                // Acceder a los elementos del JSON
+                for (const auto& pTiempo: jsonData["Tiempos"])
+                {
+                    configTiempo tiempo;
+                    tiempo.tipo = pTiempo["Tipo"].get<string>();
+                    tiempo.min = pTiempo["Duracion_min"].get<int>();
+                    tiempo.max = pTiempo["Duracion_max"].get<int>();
+                    tiempos->add(&tiempo);
+                }
+                
+                //sacar para generarcarros
+                currentConfigGeneradorCarros.cantidad = jsonData["GeneradorCarros"]["Cantidad"].get<int>();
+                currentConfigGeneradorCarros.intervalo = jsonData["GeneradorCarros"]["interval"].get<int>();
+                currentConfigGeneradorCarros.tiempoMax = jsonData["GeneradorCarros"]["TiempoMax"].get<int>();
+                currentConfigGeneradorCarros.tiempoMin = jsonData["GeneradorCarros"]["TiempoMin"].get<int>();
+                
+                //Para sacar el configsimulacion
+                currentConfigSimulacion.Unidad = jsonData["Simulacion"]["Unidad"].get<string>();
+                currentConfigSimulacion.relacionReal = jsonData["Simulacion"]["RelacionReal"].get<float>();
+                currentConfigSimulacion.ventanillas = jsonData["Simulacion"]["ventanillas"].get<int>();
+
+
+            } catch (const std::exception& e) {
+                std::cerr << "Error: " << e.what() << std::endl;
+            }
+
+            file.close(); // Cierra el archivo después de usarlo
+        } else {
+            std::cerr << "No se pudo abrir el archivo." << std::endl;
+        }
+        
     }
 
     ConfigSimulacion getConfigSimulacion()

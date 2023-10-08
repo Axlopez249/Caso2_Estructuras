@@ -1,3 +1,6 @@
+#ifndef _VENTANILLA_
+#define _VENTANILLA_ 1
+
 #include <iostream>
 #include <string>
 #include "lista.h"
@@ -30,7 +33,7 @@ private:
     int id_carro;
     int id_orden; // Los nombres de las recetas son un string no un int
 public:
-    ventanillaS (int pideVent, List<string> * pcomidas , List<string> *prefrescos ,
+    ventanillaS (int pideVent, List<string> *pcomidas , List<string> *prefrescos ,
      List<string> *ppostres , List<string> *pextras , int minTiempoEnFila, int maxTimpoEnFila) {
     
         idVent = pideVent;
@@ -105,3 +108,5 @@ public:
         currentRestaurant = current;
     }
 };
+
+#endif

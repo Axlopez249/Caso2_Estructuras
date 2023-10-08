@@ -4,7 +4,6 @@
 #include <iostream>
 #include <string>
 #include "lista.h"
-//#include "reseta.h"
 #include "orden.h"
 #include <cstdlib>
 #include <ctime>
@@ -19,8 +18,6 @@ using namespace std;
 class Restaurant
 {
 private:
-    vector<string> ingredientes_orden;
-    vector<string> orden_orden; // este es el orden de las ordenes
     Queue<orden> *ordenesacocinar;
     int min;
     int max;

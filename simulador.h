@@ -34,8 +34,8 @@ class simulador
 private:
     List<configTiempo> * lista_tiempos;
     List<ventanillaS > *ventanillas;
-    ConfigSimulacion config;
     ConfigGeneradorCarros configCarros;
+    ConfigSimulacion config;
     int cantidadCarros;
     int carrosInvertalo;
     List<string> *bebidas;
@@ -44,14 +44,17 @@ private:
     List<string> *extras; 
     List<string> *stack = new List<string>;
     Stack<string> *pilaBolsa = stack;
+
+    Queue<Carro> *colaCarro;
     
 public:
-    simulador(ConfigJson *pConfig, Restaurant *currentRestaurant)
+    simulador(ConfigJson *pConfig, Restaurant *currentRestaurant, Queue<Carro>*colaEsperaCarro)
     {
         config = pConfig->getConfigSimulacion();
         configCarros = pConfig->getConfigCarros();
         ventanillas = new List<ventanillaS>();
         lista_tiempos = pConfig->getConfigTiempo();
+        colaCarro = colaEsperaCarro;
         
 
         //LLamo esta funcion para saber cual es el tiempo que debo extraer para crear las ventanillas
@@ -72,31 +75,46 @@ public:
             ventanillas->add(nueva_ventanilla);
         }
 
-        std::thread miHilo(generar_carros);
-        miHilo.join();
         
     }
 
-
-
-    void generar_carros(int pVentanilla){
+    void generar_carros(){
         int carroID = 1;
-        while (true){
+        while (true){//carroID >= configCarros.cantidad Esta vara creo que nunca se cumple porque carroId inicia en 1 y nunca va a ser mayor a los 100 carros
             //Se generan carros de forma infinita cada un intervalo de tiempo que se transforma a milisegundo
             for (int i = 0; i <= configCarros.cantidad; i++){
-                Carro *carro = new carro(carroID++);
-                int ventanillaID = carroID % config.ventanillas;
-                //Ingeso a las colas de ventanillas
-                if (ventanillaID >= 0 && ventanillaID <config.ventanillas){
-                    ventanillas[ventanillaID].addCarro(carro);
-                }
+                Carro *carro = new Carro(carroID++);
+                cout<<carroID<<endl;
+
+                colaCarro->enqueue(carro);
+
             }
-            std::this_thread::sleep_for(std::chrono::milliseconds(configCarros.intervalo*60*1000)); 
+            std::this_thread::sleep_for(std::chrono::milliseconds(configCarros.intervalo*60*1000));
         }
     }
 
+    void ingreso_ventanilla(){
 
-    void ingreso_restaurant(vector<string> orden)
+        ConfigSimulacion vent;
+        int cont = 0;
+
+        while (true){
+
+            Carro *carro = colaCarro->dequeue();
+
+
+            //Se llama a la funcion insertar 
+            ventanillas->insertCarroVentanilla(cont, carro);
+            cont++;
+            if (cont== 5){
+                cont = 0;
+            }
+        }
+
+    }
+
+
+    /*void ingreso_restaurant(vector<string> orden)
     {
         ConfigJson comidas;
         bebidas = comidas.getBebidas();
@@ -132,7 +150,7 @@ public:
                 pilaBolsa->push(comida);
             }
         }
-    }
+    }*/
 
     void tiempo_ventanilla(vector<Carro> &pCarro)
     {

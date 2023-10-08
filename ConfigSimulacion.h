@@ -7,7 +7,7 @@
 struct ConfigSimulacion //aca dice error por redefinicion pero no se por que
 {
     string Unidad;
-    float RelacionReal;
+    float relacionReal;
     int ventanillas;
 };
 

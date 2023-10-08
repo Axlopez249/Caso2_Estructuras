@@ -181,14 +181,16 @@ class List : public Stack<T>, public Queue<T> {
             return ""; // Retorna una cadena vacía si el contador es mayor que el tamaño de la lista
         }
 
-        void insertCarroVentanilla(int entero, Carro carro) {
+        void insertCarroVentanilla(int entero, Carro *carro) {
             Node<T>* current = this->first;
             int contadorLocal = 0;
 
             while (current != nullptr) {
                 if (entero == contadorLocal) {
                     //Se inserta en el nodo el carro
-                    current->setData(carro);
+                    ventanillaS *ventanilla = current->getData();
+                    ventanilla->addCarro(carro);
+                    return;
                 }
                 contadorLocal++;
                 current = current->getNext();

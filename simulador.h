@@ -44,6 +44,8 @@ private:
     List<string> *extras; 
     List<string> *stack = new List<string>;
     Stack<string> *pilaBolsa = stack;
+
+    Queue<Carro> *colaCarro;
     
 public:
     simulador(ConfigJson *pConfig, Restaurant *currentRestaurant, List<Carro> colaEsperaCarro)
@@ -52,6 +54,7 @@ public:
         configCarros = pConfig->getConfigCarros();
         ventanillas = new List<ventanillaS>();
         lista_tiempos = pConfig->getConfigTiempo();
+        colaCarro = colaEsperaCarro;
         
 
         //LLamo esta funcion para saber cual es el tiempo que debo extraer para crear las ventanillas
@@ -72,38 +75,40 @@ public:
             ventanillas->add(nueva_ventanilla);
         }
 
-        std::thread miHilo(&simulador::generar_carros, this, colaEsperaCarro);
+        std::thread miHilo(&simulador::generar_carros, this);
         miHilo.join();
         
     }
 
 
 
-    void generar_carros(List<Carro> colaEsperaCarros){
+    void generar_carros(){
         int carroID = 1;
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(configCarros.intervalo*60*1000)); 
-        while (carroID >= configCarros.cantidad){
+         
+        while (true){//carroID >= configCarros.cantidad Esta vara creo que nunca se cumple porque carroId inicia en 1 y nunca va a ser mayor a los 100 carros
 
             //Se generan carros de forma infinita cada un intervalo de tiempo que se transforma a milisegundo
             for (int i = 0; i <= configCarros.cantidad; i++){
                 Carro *carro = new Carro(carroID++);
-                colaEsperaCarros.enqueue(*carro);
+                colaCarro.enqueue(*carro);
 
             }
+            std::this_thread::sleep_for(std::chrono::milliseconds(configCarros.intervalo*60*1000));
         }
     }
 
-    void ingreso_ventanilla(List<string> colaEsperaCarros){
+    void ingreso_ventanilla(){
 
         ConfigSimulacion vent;
         int cont = 0;
 
-        while (cont >= vent.ventanillas){
-            Carro carro = colaEsperaCarros.dequeue();
+        while (true){
+            Carro *carro = colaCarro.dequeue();
             //Se llama a la funcion insertar 
             ventanillas->insertCarroVentanilla(cont, carro);
             cont++;
+            if (cont== 5){cont = 0;}
         }
 
     }

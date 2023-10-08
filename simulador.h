@@ -46,7 +46,7 @@ private:
     Stack<string> *pilaBolsa = stack;
     
 public:
-    simulador(ConfigJson *pConfig, Restaurant *currentRestaurant)
+    simulador(ConfigJson *pConfig, Restaurant *currentRestaurant, List<Carro> colaEsperaCarro)
     {
         config = pConfig->getConfigSimulacion();
         configCarros = pConfig->getConfigCarros();
@@ -72,29 +72,41 @@ public:
             ventanillas->add(nueva_ventanilla);
         }
 
-        std::thread miHilo(generar_carros);
+        std::thread miHilo(&simulador::generar_carros, this, colaEsperaCarro);
         miHilo.join();
         
     }
 
 
 
-    void generar_carros(int pVentanilla){
+    void generar_carros(List<Carro> colaEsperaCarros){
         int carroID = 1;
-        while (true){
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(configCarros.intervalo*60*1000)); 
+        while (carroID >= configCarros.cantidad){
+
             //Se generan carros de forma infinita cada un intervalo de tiempo que se transforma a milisegundo
             for (int i = 0; i <= configCarros.cantidad; i++){
-                Carro *carro = new carro(carroID++);
-                int ventanillaID = carroID % config.ventanillas;
-                //Ingeso a las colas de ventanillas
-                if (ventanillaID >= 0 && ventanillaID <config.ventanillas){
-                    ventanillas[ventanillaID].addCarro(carro);
-                }
+                Carro *carro = new Carro(carroID++);
+                colaEsperaCarros.enqueue(*carro);
+
             }
-            std::this_thread::sleep_for(std::chrono::milliseconds(configCarros.intervalo*60*1000)); 
         }
     }
 
+    void ingreso_ventanilla(List<string> colaEsperaCarros){
+
+        ConfigSimulacion vent;
+        int cont = 0;
+
+        while (cont >= vent.ventanillas){
+            Carro carro = colaEsperaCarros.dequeue();
+            //Se llama a la funcion insertar 
+            ventanillas->insertCarroVentanilla(cont, carro);
+            cont++;
+        }
+
+    }
 
     void ingreso_restaurant(vector<string> orden)
     {
@@ -107,14 +119,14 @@ public:
         //For para agregar las comidas pesadas
         for (const string& comida : orden){
             if (find(comidasPesadas.begin(), comidasPesadas.end(), comida) != comidasPesadas.end()) {
-                pilaBolsa.push(comida);
+                pilaBolsa.push(*comida);
             }
         }
 
         //For para agregar los extras        
         for (const string& comida : orden){
             if (find(extras.begin(), extras.end(), comida) != extras.end()){
-                pilaBolsa->push(comida);
+                pilaBolsa->push(*comida);
             }
             
         }
@@ -122,14 +134,14 @@ public:
         //For para agregar los postres
         for (const string& comida : orden){
             if (find(postres.begin(), postres.end(), comida) != postres.end()){
-                pilaBolsa->push(comida);
+                pilaBolsa->push(*comida);
             }
         }
 
         //For para agregar las bebidas
         for (const string& comida : orden){
             if (find(bebidas.begin(), bebidas.end(), comida) != bebidas.end()){
-                pilaBolsa->push(comida);
+                pilaBolsa->push(*comida);
             }
         }
     }

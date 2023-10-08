@@ -2,7 +2,7 @@
 #define ConfigGeneradorCarros_ 
 #include <string>
 
-struct ConfigGeneradorCarros //aca dice error por redefinicion pero no se por que
+struct ConfigGeneradorCarros 
 {
     int cantidad;
     int intervalo;

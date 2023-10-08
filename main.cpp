@@ -18,10 +18,11 @@ int main() {
 
     //Creacion de la cola para las ordenes de los restaurantes
     Queue<orden> *listOrders = new List<orden>();
+    List<Carro> *colaEsperaCarro = new List<Carro>();
 
     ConfigJson *config = new ConfigJson();
     Restaurant *resta = new Restaurant(listOrders);
-    simulador *mainSim = new simulador(config, resta);
+    simulador *mainSim = new simulador(config, resta, colaEsperaCarro);
 
     //Queue<string[]> *cola_carros1 = new List<string[]>();
     //Queue<string[]> *cola_carros2 = new List<string[]>();

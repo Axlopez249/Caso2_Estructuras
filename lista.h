@@ -2,6 +2,7 @@
 #include "stack.h"
 #include "configTiempo.h"
 #include "queue.h"
+#include "carro.h"
 #include <unordered_map>
 
 #ifndef LIST 
@@ -180,6 +181,19 @@ class List : public Stack<T>, public Queue<T> {
             return ""; // Retorna una cadena vacía si el contador es mayor que el tamaño de la lista
         }
 
+        void insertCarroVentanilla(int entero, Carro carro) {
+            Node<T>* current = this->first;
+            int contadorLocal = 0;
+
+            while (current != nullptr) {
+                if (entero == contadorLocal) {
+                    //Se inserta en el nodo el carro
+                    current->setData(carro);
+                }
+                contadorLocal++;
+                current = current->getNext();
+            }
+        }
 
 
         void push(T* pValue) {

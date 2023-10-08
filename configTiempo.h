@@ -3,7 +3,7 @@
 
 #include <string>
 
-struct configTiempo //aca dice error por redefinicion pero no se por que
+struct configTiempo 
 {
     string tipo;
     int min;

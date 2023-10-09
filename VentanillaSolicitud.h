@@ -61,7 +61,7 @@ public:
         std::random_device rd;
         std::mt19937 generator(rd());
         std::uniform_int_distribution<int> distribution(0, 3);
-        cout<<"l"<<endl;
+        //cout<<"l"<<endl;
         std::uniform_int_distribution<int> distribution1(tMin_, tMax_); // Rango [1, 4] Falla aqui
 
         while (!carrosEsperando->isEmpty())
@@ -89,11 +89,11 @@ public:
 
             
             orden *ordenNueva = new orden(carro_nuevo, comida_orden, bebida_orden, postre_orden, extra_orden);
-            //currentRestaurant->addOrder(ordenNueva);
+            currentRestaurant->addOrder(ordenNueva);
 
             //Se saca random para para realizar cada cierto tiempo
-            //int numeroAleatorio = distribution1(generator);
-            //std::this_thread::sleep_for(std::chrono::milliseconds(numeroAleatorio*60*1000)); 
+            int numeroAleatorio = distribution1(generator);
+            std::this_thread::sleep_for(std::chrono::milliseconds(numeroAleatorio*60*1000)); 
         }
         
         // ciclo infinito while la !carrosEsperando->isEmpty()

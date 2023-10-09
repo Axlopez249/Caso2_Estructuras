@@ -25,6 +25,7 @@ private:
     List<string> *postres;
     List<string> *extras;
 
+    int idVent;
     int tMin_;
     int tMax_;
     Restaurant *currentRestaurant;
@@ -43,7 +44,7 @@ public:
 
         
 
-       //std::thread miHilo(&ventanillaS::procesarOrden, this);
+        //std::thread miHilo(&ventanillaS::procesarOrden, this);
         //miHilo.detach();
 
     }

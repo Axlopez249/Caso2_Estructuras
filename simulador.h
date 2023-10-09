@@ -147,7 +147,7 @@ public:
 
     void ingreso_ventanilla(){
 
-        while (!colaCarro->isEmpty()){
+        while (true){
             std::lock_guard<std::mutex> lock(mtx);
 
             //Se llama a la funcion insertar 

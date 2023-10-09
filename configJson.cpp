@@ -1,14 +1,22 @@
 #ifndef CONFIGJSON
 #define CONFIGJSON 1
 
-#include "json.hpp"
+
+
+
 #include <fstream>
+
 #include <iostream>
+
 #include <string>
 #include "lista.h"
-#include "ConfigSimulacion.h"
+#include "json.hpp"
+
 #include "ConfigGeneradorCarros.h"
+
 #include "configTiempo.h"
+#include "ConfigSimulacion.h"
+
 
 
 using json = nlohmann::json;
@@ -18,9 +26,9 @@ class ConfigJson
 {
 private:
 
-    
-    ConfigGeneradorCarros currentConfigGeneradorCarros;
     ConfigSimulacion currentConfigSimulacion;
+    ConfigGeneradorCarros currentConfigGeneradorCarros;
+    
     List<string> *bebidas;
     List<string> *comidasPesadas;
     List<string> *postres;
@@ -33,6 +41,7 @@ private:
 public:
     ConfigJson()
     {
+     
         // cargar el json al objecto
         // inicializo las listas
         bebidas = new List<string>();
@@ -51,7 +60,8 @@ public:
                 json jsonData = json::parse(jsonStr);
                 //Para las comidas
                 for (const auto& postre : jsonData["Postres"]) {
-                    postres->add(new string (postre));
+                    postres->add(new string(postre));
+                    
                 }
                 for (const auto& comida : jsonData["ComidaPesada"]) {
                     comidasPesadas->add(new string(comida));
@@ -76,6 +86,7 @@ public:
 
     void parseAllJson()
     {
+        
         // cargar todo en estructuras
         //tiempos = new List<string>(); //Esto da error porque crea dos listas de tipo diferente con el mismo nombre
         //y no creo que esta lista tipo string sea necesaria
@@ -92,11 +103,15 @@ public:
                 // Acceder a los elementos del JSON
                 for (const auto& pTiempo: jsonData["Tiempos"])
                 {
-                    configTiempo tiempo;
-                    tiempo.tipo = pTiempo["Tipo"].get<string>();
-                    tiempo.min = pTiempo["Duracion_min"].get<int>();
-                    tiempo.max = pTiempo["Duracion_max"].get<int>();
-                    tiempos->add(&tiempo);
+                    configTiempo* tiempo = new configTiempo(); //aqui pase esto a puntero y se soluciono el problema
+                
+                    tiempo->tipo = pTiempo["Tipo"].get<string>();
+                    tiempo->min = pTiempo["Duracion_min"].get<int>();
+                    tiempo->max = pTiempo["Duracion_max"].get<int>();
+                    
+                    tiempos->add(tiempo);
+                    
+   
                 }
                 
                 //sacar para generarcarros
@@ -106,10 +121,10 @@ public:
                 currentConfigGeneradorCarros.tiempoMin = jsonData["GeneradorCarros"]["TiempoMin"].get<int>();
                 
                 //Para sacar el configsimulacion
+                
                 currentConfigSimulacion.Unidad = jsonData["Simulacion"]["Unidad"].get<string>();
                 currentConfigSimulacion.relacionReal = jsonData["Simulacion"]["RelacionReal"].get<float>();
                 currentConfigSimulacion.ventanillas = jsonData["Simulacion"]["ventanillas"].get<int>();
-
 
             } catch (const std::exception& e) {
                 std::cerr << "Error: " << e.what() << std::endl;

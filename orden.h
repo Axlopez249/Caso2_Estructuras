@@ -19,12 +19,15 @@ private:
 
 public:
     orden(Carro* pcarro, string pcomida, string pbebida, string ppostre, string pextra){
+        
+        
         //Se crea una orden
         carro = pcarro;
         comida = pcomida;
         bebida = pbebida;
         postre = ppostre;
         extra = pextra;
+        
         
     }
 

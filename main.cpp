@@ -23,7 +23,7 @@ int main() {
 
     ConfigJson *config = new ConfigJson();
     Restaurant *resta = new Restaurant(listOrders);
-    simulador *mainSim = new simulador(config, resta, colaEsperaCarro);
+    simulador *mainSim = new simulador(config, resta, colaEsperaCarro); 
 
     
 

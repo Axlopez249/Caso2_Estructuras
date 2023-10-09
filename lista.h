@@ -1,15 +1,16 @@
 
-
+#include "VentanillaSolicitud.h"
 #include "Node.h"
 #include "stack.h"
 #include "configTiempo.h"
+
 #include "queue.h"
 #include "carro.h"
-#include "VentanillaSolicitud.h"
-#include <unordered_map>
 
+#include <unordered_map>
 #ifndef LIST 
 #define LIST 1
+
 
 using namespace std;
 

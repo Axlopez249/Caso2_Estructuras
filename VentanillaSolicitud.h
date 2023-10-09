@@ -44,8 +44,10 @@ public:
         tMin_ = minTiempoEnFila;
         tMax_ = maxTimpoEnFila;
 
+            cout<<"aa"<<endl;
+            cout<<" "<<endl;
 
-        std::thread miHilo(&ventanillaS::procesarOrden, this);
+       std::thread miHilo(&ventanillaS::procesarOrden, this);
         miHilo.detach();
     }
 
@@ -59,12 +61,14 @@ public:
         std::random_device rd;
         std::mt19937 generator(rd());
         std::uniform_int_distribution<int> distribution(0, 3);
-        std::uniform_int_distribution<int> distribution1(tMin_, tMax_); // Rango [1, 4]
+        cout<<"l"<<endl;
+        std::uniform_int_distribution<int> distribution1(tMin_, tMax_); // Rango [1, 4] Falla aqui
 
         while (!carrosEsperando->isEmpty())
         {
+            
             Carro *carro_nuevo = carrosEsperando->dequeue();
-
+            
             //Parte donde se crea la orden 
             //La cantidad de objetos de las comida, bebidas y eso de cada lista es de 4 entonces se crea una funcion 
             //en el lista.h que tome un numero aleatorio
@@ -75,7 +79,7 @@ public:
             int bebida = distribution(generator);
             int extra = distribution(generator);
             int postre = distribution(generator);
-
+            
             //Se llama la funcion
             //Se supone que retorna un puntero de lo que sea, pero ya se sabe que es string
             string comida_orden = comidasPesadas->getDataRandom(comida);
@@ -83,12 +87,13 @@ public:
             string extra_orden = comidasPesadas->getDataRandom(extra);
             string postre_orden = comidasPesadas->getDataRandom(postre);
 
+            
             orden *ordenNueva = new orden(carro_nuevo, comida_orden, bebida_orden, postre_orden, extra_orden);
-            currentRestaurant->addOrder(ordenNueva);
+            //currentRestaurant->addOrder(ordenNueva);
 
             //Se saca random para para realizar cada cierto tiempo
-            int numeroAleatorio = distribution1(generator);
-            std::this_thread::sleep_for(std::chrono::milliseconds(numeroAleatorio*60*1000)); 
+            //int numeroAleatorio = distribution1(generator);
+            //std::this_thread::sleep_for(std::chrono::milliseconds(numeroAleatorio*60*1000)); 
         }
         
         // ciclo infinito while la !carrosEsperando->isEmpty()

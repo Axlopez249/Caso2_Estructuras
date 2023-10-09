@@ -4,7 +4,7 @@
 #include <string>
 
 
-struct ConfigSimulacion //aca dice error por redefinicion pero no se por que
+struct ConfigSimulacion 
 {
     string Unidad;
     float relacionReal;

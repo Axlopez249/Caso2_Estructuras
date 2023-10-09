@@ -27,11 +27,8 @@ private:
 
     int tMin_;
     int tMax_;
-    int idVent;
     Restaurant *currentRestaurant;
 
-    int id_carro;
-    int id_orden; // Los nombres de las recetas son un string no un int
 public:
     ventanillaS (int pideVent, List<string> *pcomidas , List<string> *prefrescos ,
      List<string> *ppostres , List<string> *pextras , int minTiempoEnFila, int maxTimpoEnFila) {
@@ -44,11 +41,11 @@ public:
         tMin_ = minTiempoEnFila;
         tMax_ = maxTimpoEnFila;
 
-            cout<<"aa"<<endl;
-            cout<<" "<<endl;
+        
 
-       std::thread miHilo(&ventanillaS::procesarOrden, this);
-        miHilo.detach();
+       //std::thread miHilo(&ventanillaS::procesarOrden, this);
+        //miHilo.detach();
+
     }
 
     void addCarro(Carro *pNewCarro)
@@ -61,8 +58,7 @@ public:
         std::random_device rd;
         std::mt19937 generator(rd());
         std::uniform_int_distribution<int> distribution(0, 3);
-        //cout<<"l"<<endl;
-        std::uniform_int_distribution<int> distribution1(tMin_, tMax_); // Rango [1, 4] Falla aqui
+        
 
         while (!carrosEsperando->isEmpty())
         {
@@ -92,8 +88,8 @@ public:
             currentRestaurant->addOrder(ordenNueva);
 
             //Se saca random para para realizar cada cierto tiempo
-            int numeroAleatorio = distribution1(generator);
-            std::this_thread::sleep_for(std::chrono::milliseconds(numeroAleatorio*60*1000)); 
+            //int numeroAleatorio = distribution1(generator);
+            //std::this_thread::sleep_for(std::chrono::milliseconds(numeroAleatorio*60*1000)); 
         }
         
         // ciclo infinito while la !carrosEsperando->isEmpty()

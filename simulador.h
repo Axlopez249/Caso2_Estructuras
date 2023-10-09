@@ -9,10 +9,15 @@
 // Usados para el hilo
 #include <thread>
 #include <chrono>
+#include <mutex> // Necesario para la protección del mutex
+#include <memory> // Necesario para std::shared_ptr
+
 
 // Usados para srand(), rand() y time()
 #include <cstdlib>
 #include <ctime>
+#include <iostream>
+#include <random>
 
 #include "lista.h"
 #include "queue.h"
@@ -35,6 +40,9 @@ using namespace std;
 class simulador
 {
 private:
+
+    std::mutex mtx;
+
     List<configTiempo> *lista_tiempos;
     List<ventanillaS > *ventanillas;
     ConfigGeneradorCarros configCarros;
@@ -42,6 +50,7 @@ private:
     
     int cantidadCarros;
     int carrosInvertalo;
+    int randomOrden;
 
     List<string> *bebidas;
     List<string> *comidasPesadas;
@@ -49,7 +58,7 @@ private:
     List<string> *extras; 
     List<string> *stack = new List<string>;
     Stack<string> *pilaBolsa = stack;
-    
+    configTiempo *tiempoTomandoOrden;
     Queue<Carro> *colaCarro;
     
 public:
@@ -66,6 +75,8 @@ public:
         bebidas = pConfig->getBebidas();
         postres = pConfig->getpostres();
         extras = pConfig->getextras();
+
+        
         
  
         
@@ -75,6 +86,20 @@ public:
 
         //LLamo esta funcion para saber cual es el tiempo que debo extraer para cocinar en el restaurante
         configTiempo *tiempoRestaurant = lista_tiempos->searchValue("En espera");
+
+        tiempoTomandoOrden = lista_tiempos->searchValue("Solicitando la orden");
+
+
+        //se saca el random
+        std::random_device rd;
+        std::mt19937 gen(rd()); // Mersenne Twister 19937 generator
+
+        
+        // Crear un objeto de distribución uniforme dentro del rango
+        std::uniform_int_distribution<> dis(tiempoTomandoOrden->min, tiempoTomandoOrden->max);
+        
+        // Generar números aleatorios usando el generador y la distribución
+        randomOrden = dis(gen);
         
         int tmin = tiempoVentanilla->min;
         int tmax = tiempoVentanilla->max;
@@ -90,12 +115,10 @@ public:
             
            ventanillaS *nueva_ventanilla = new ventanillaS(i, comidasPesadas, bebidas, postres,
              extras, tmin, tmax);
-
+            //cout<<i<<endl;
             nueva_ventanilla->setRestaurant(currentRestaurant);
             ventanillas->add(nueva_ventanilla);
-           
-            
-            
+            //cout<<ventanillas->getSize();
         }
 
         
@@ -104,16 +127,18 @@ public:
     void generar_carros(){
         int carroID = 1;
         
-        while (carroID >= configCarros.cantidad){
+        while (true){
+            std::lock_guard<std::mutex> lock(mtx);
+            
             //Se generan carros de forma infinita cada un intervalo de tiempo que se transforma a milisegundo
+            //
             for (int i = 0; i <= configCarros.cantidad; i++){
                 carroID++;
                 Carro *carro = new Carro(carroID);
-                cout<<carroID<<endl;
-
                 colaCarro->enqueue(carro);
-
+                //cout<<carroID<<endl;
             }
+            //cout<< "ingresando 100 carros "<<endl;
             std::this_thread::sleep_for(std::chrono::milliseconds(configCarros.intervalo*60*1000));
         }
     }
@@ -121,23 +146,21 @@ public:
 
 
     void ingreso_ventanilla(){
-        int cont = 0;
 
-        while (cont >= config.ventanillas){
-
-            Carro *carro = colaCarro->dequeue();
-
+        while (!colaCarro->isEmpty()){
+            std::lock_guard<std::mutex> lock(mtx);
 
             //Se llama a la funcion insertar 
-            ventanillas->insertCarroVentanilla(cont, carro);
-            cont++;
-
-           // if (cont== 5){
-            //    cont = 0;
-           // }
+            for (int i = 0; i < ventanillas->getSize(); i++)
+            {
+                ventanillas->insertCarroVentanilla(i, colaCarro->dequeue());
+                cout<<"ingresando a ventanilla "<< i <<endl;
+            }
+            std::this_thread::sleep_for(std::chrono::milliseconds(randomOrden*60*1000));
         }
 
     }
+
 /*
     void ingreso_restaurant(vector<string> orden)
     {

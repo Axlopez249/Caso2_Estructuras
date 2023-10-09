@@ -23,7 +23,14 @@ int main() {
 
     ConfigJson *config = new ConfigJson();
     Restaurant *resta = new Restaurant(listOrders);
-    simulador *mainSim = new simulador(config, resta, colaEsperaCarro); 
+    simulador *mainSimu = new simulador(config, resta, colaEsperaCarro); 
+
+
+    std::thread generarCarrosThread(&simulador::generar_carros, mainSimu);
+    std::thread ingresoVentanillaThread(&simulador::ingreso_ventanilla, mainSimu);
+
+    generarCarrosThread.join();
+    ingresoVentanillaThread.join();
 
     
 

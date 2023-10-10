@@ -16,6 +16,7 @@
 
 #include "configTiempo.h"
 #include "ConfigSimulacion.h"
+#include "Alimento.h"
 
 
 
@@ -61,16 +62,15 @@ public:
                 //Para las comidas
                 for (const auto& postre : jsonData["Postres"]) {
                     postres->add(new string(postre));
-                    
                 }
                 for (const auto& comida : jsonData["ComidaPesada"]) {
-                    comidasPesadas->add(new string(comida));
+                    postres->add(new string(comida));
                 }
                 for (const auto& extra : jsonData["Extra"]) {
-                    extras->add(new string(extra));
+                    postres->add(new string(extra));
                 }
                 for (const auto& bebida : jsonData["Bebida"]) {
-                    bebidas->add(new string(bebida));
+                    postres->add(new string(bebida));
                 }
             } catch (const std::exception& e) {
                 std::cerr << "Error: " << e.what() << std::endl;

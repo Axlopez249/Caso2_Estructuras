@@ -3,27 +3,30 @@
 
 #include <iostream>
 #include <string>
-#include "lista.h"
-#include "orden.h"
-#include "restaurant.h"
-#include "carro.h"
-#include "queue.h"
 #include <random>
-
 #include <thread>
 #include <chrono>
 #include <functional>
 
+#include "lista.h"
+#include "restaurant.h"
+#include "carro.h"
+#include "orden.h"
+#include "Alimento.h"
+
+
 using namespace std;
 
-class ventanillaS
+
+
+class ventanillaSolicitud
 {
 private:
-    Queue<Carro> *carrosEsperando;
-    List<string> *bebidas;
-    List<string> *comidasPesadas;
-    List<string> *postres;
-    List<string> *extras;
+    Queue<Carro> *carrosEsperando = new List<Carro>();
+    List<string> *bebidas = new List<string>();
+    List<string> *comidasPesadas = new List<string>();
+    List<string> *postres = new List<string>();
+    List<string> *extras = new List<string>();
 
     int idVent;
     int tMin_;
@@ -31,7 +34,7 @@ private:
     Restaurant *currentRestaurant;
 
 public:
-    ventanillaS (int pideVent, List<string> *pcomidas , List<string> *prefrescos ,
+    ventanillaSolicitud(int pideVent, List<string> *pcomidas , List<string> *prefrescos ,
      List<string> *ppostres , List<string> *pextras , int minTiempoEnFila, int maxTimpoEnFila) {
     
         idVent = pideVent;
@@ -44,8 +47,8 @@ public:
 
         
 
-        //std::thread miHilo(&ventanillaS::procesarOrden, this);
-        //miHilo.detach();
+        std::thread miHilo(&ventanillaSolicitud::procesarOrden, this);
+        miHilo.detach();
 
     }
 
@@ -58,14 +61,16 @@ public:
     {
         std::random_device rd;
         std::mt19937 generator(rd());
-        std::uniform_int_distribution<int> distribution(0, 3);
-        
 
-        while (!carrosEsperando->isEmpty())
+        std::uniform_int_distribution<int> distribution(0, 3);
+        std::uniform_int_distribution<int> distribution1(tMin_, tMax_);
+
+        while (true)
         {
-            
-            Carro *carro_nuevo = carrosEsperando->dequeue();
-            
+            if (!carrosEsperando->isEmpty())
+            {
+                Carro *carro_nuevo = carrosEsperando->dequeue();
+            .
             //Parte donde se crea la orden 
             //La cantidad de objetos de las comida, bebidas y eso de cada lista es de 4 entonces se crea una funcion 
             //en el lista.h que tome un numero aleatorio
@@ -79,18 +84,23 @@ public:
             
             //Se llama la funcion
             //Se supone que retorna un puntero de lo que sea, pero ya se sabe que es string
+            
             string comida_orden = comidasPesadas->getDataRandom(comida);
             string bebida_orden = comidasPesadas->getDataRandom(bebida);
             string extra_orden = comidasPesadas->getDataRandom(extra);
             string postre_orden = comidasPesadas->getDataRandom(postre);
-
+            
             
             orden *ordenNueva = new orden(carro_nuevo, comida_orden, bebida_orden, postre_orden, extra_orden);
             currentRestaurant->addOrder(ordenNueva);
 
+            cout<<"Agregado al restaurante"<<endl;
+
             //Se saca random para para realizar cada cierto tiempo
-            //int numeroAleatorio = distribution1(generator);
-            //std::this_thread::sleep_for(std::chrono::milliseconds(numeroAleatorio*60*1000)); 
+             
+            }
+            int numeroAleatorio = distribution1(generator);
+            std::this_thread::sleep_for(std::chrono::milliseconds(numeroAleatorio*1000));
         }
         
         // ciclo infinito while la !carrosEsperando->isEmpty()

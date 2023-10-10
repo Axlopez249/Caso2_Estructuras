@@ -1,18 +1,23 @@
+#include <unordered_map>
+#include <iostream>
+#include <string>
 
-#include "VentanillaSolicitud.h"
 #include "Node.h"
 #include "stack.h"
+#include "Alimento.h"
 #include "configTiempo.h"
-
+#include "VentanillaSolicitud.h"
 #include "queue.h"
 #include "carro.h"
 
-#include <unordered_map>
-#ifndef LIST 
-#define LIST 1
+
+#ifndef _PRUEBA_ 
+#define _PRUEBA_ 1
 
 
 using namespace std;
+
+//class ventanillaSolicitud;
 
 // 2. ajustar a que esta lista sea doblemente enlazada, cambia el add, find, insert y el remove
 template <typename T> 
@@ -22,6 +27,7 @@ class List : public Stack<T>, public Queue<T> {
         Node<T> *last;
         Node<T> *searchPosition;
         unordered_map<int, Node<T>*> nodeIndex; 
+        
         int size;
 
     public:
@@ -185,21 +191,24 @@ class List : public Stack<T>, public Queue<T> {
             }
             return ""; // Retorna una cadena vacía si el contador es mayor que el tamaño de la lista
         }
-
+        /*
         void insertCarroVentanilla(int entero, Carro *carro) {
             Node<T>* current = this->first;
             int contadorLocal = 0;
+            ventanillaSolicitud *ventanilla;
 
             while (current != nullptr) {
                 if (entero == contadorLocal) {
                     //Se inserta en el nodo el carro
-                    current->getData()->addCarro(carro);
+                    //current->getData()->addCarro(carro);
+                    ventanilla = current->getData();
+                    ventanilla->addCarro(carro);
                     return;
                 }
                 contadorLocal++;
                 current = current->getNext();
             }
-        }
+        }*/
 
 
 

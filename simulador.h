@@ -19,24 +19,23 @@
 #include <iostream>
 #include <random>
 
-#include "lista.h"
-#include "queue.h"
-#include "stack.h"
 
+//#include "queue.h"
+//#include "stack.h"
+#include "lista.h"
 #include "json.hpp"
 #include "configJson.cpp"
 #include "ConfigGeneradorCarros.h"
 #include "ConfigSimulacion.h"
 #include "configTiempo.h"
-
+#include "Alimento.h"
 #include "restaurant.h"
-
 #include "carro.h"
-
 #include "ventanillaSolicitud.h"
+#include "Node.h"
 
 using namespace std;
-
+template <typename T> 
 class simulador
 {
 private:
@@ -44,7 +43,7 @@ private:
     std::mutex mtx;
 
     List<configTiempo> *lista_tiempos;
-    List<ventanillaS > *ventanillas;
+    List<ventanillaSolicitud > *ventanillas;
     ConfigGeneradorCarros configCarros;
     ConfigSimulacion config;
     
@@ -56,8 +55,8 @@ private:
     List<string> *comidasPesadas;
     List<string> *postres;
     List<string> *extras; 
-    List<string> *stack = new List<string>;
-    Stack<string> *pilaBolsa = stack;
+    //List<string> *stack = new List<string>;
+    //Stack<string> *pilaBolsa = stack;
     configTiempo *tiempoTomandoOrden;
     Queue<Carro> *colaCarro;
     
@@ -67,7 +66,7 @@ public:
         
         config = pConfig->getConfigSimulacion();
         configCarros = pConfig->getConfigCarros();
-        ventanillas = new List<ventanillaS>();
+        ventanillas = new List<ventanillaSolicitud>();
         lista_tiempos = pConfig->getConfigTiempo();
         colaCarro = colaEsperaCarro;
 
@@ -113,7 +112,7 @@ public:
         for (int i = 0; i < config.ventanillas; i++)
         {
             
-           ventanillaS *nueva_ventanilla = new ventanillaS(i, comidasPesadas, bebidas, postres,
+           ventanillaSolicitud *nueva_ventanilla = new ventanillaSolicitud(i, comidasPesadas, bebidas, postres,
              extras, tmin, tmax);
             //cout<<i<<endl;
             nueva_ventanilla->setRestaurant(currentRestaurant);
@@ -124,39 +123,53 @@ public:
         
     }
 
-    void generar_carros(){
+
+    void generar_carros() {
         int carroID = 1;
-        
-        while (true){
-            std::lock_guard<std::mutex> lock(mtx);
-            
-            //Se generan carros de forma infinita cada un intervalo de tiempo que se transforma a milisegundo
-            //
-            for (int i = 0; i <= configCarros.cantidad; i++){
-                carroID++;
-                Carro *carro = new Carro(carroID);
+        while (true) {
+            //std::lock_guard<std::mutex> lock(sim->getMutex());
+            for (int i = 0; i < configCarros.cantidad; i++)
+            {
+                Carro* carro = new Carro(carroID++);
                 colaCarro->enqueue(carro);
-                //cout<<carroID<<endl;
             }
-            //cout<< "ingresando 100 carros "<<endl;
-            std::this_thread::sleep_for(std::chrono::milliseconds(configCarros.intervalo*60*1000));
+            //cout<<"hola1"<<endl;
+            std::this_thread::sleep_for(std::chrono::milliseconds(configCarros.intervalo * 1000));
         }
     }
 
 
 
     void ingreso_ventanilla(){
+        while (true) {
+            //std::lock_guard<std::mutex> lock(sim->getMutex());
+            if (!colaCarro->isEmpty()) {
 
-        while (true){
-            std::lock_guard<std::mutex> lock(mtx);
+                for (int i = 0; i < ventanillas->getSize(); ++i) {
+                    
+                    //Me daba error el lista.h porque no funcionaba el include de ventanilla por lo que no me leia el objeto
+                    Node<ventanillaSolicitud>* current = ventanillas->getFirst();
+                    int contadorLocal = 0;
+                    ventanillaSolicitud *ventanilla;
+                    
+                    while (current != nullptr) {
+                        if (i == contadorLocal) {
+                            //Se inserta en el nodo el carro
+                            //current->getData()->addCarro(carro);
+                            ventanilla = current->getData();
+                            ventanilla->addCarro(colaCarro->dequeue());
+                            break;
+                        }
+                        contadorLocal++;
+                        current = current->getNext();
+                    }
 
-            //Se llama a la funcion insertar 
-            for (int i = 0; i < ventanillas->getSize(); i++)
-            {
-                ventanillas->insertCarroVentanilla(i, colaCarro->dequeue());
-                cout<<"ingresando a ventanilla "<< i <<endl;
+
+                    std::cout << "Ingresando carro a ventanilla " << i << std::endl;
+                }
+                cout<<"hola"<<endl;
             }
-            std::this_thread::sleep_for(std::chrono::milliseconds(randomOrden*60*1000));
+            std::this_thread::sleep_for(std::chrono::milliseconds(randomOrden* 1000));
         }
 
     }

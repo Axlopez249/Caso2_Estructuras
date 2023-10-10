@@ -3,14 +3,15 @@
 
 #include <iostream>
 #include <string>
-#include "lista.h"
-#include "orden.h"
 #include <cstdlib>
 #include <ctime>
 
 #include <thread>
 #include <chrono>
 #include <random>
+
+#include "lista.h"
+#include "orden.h"
 
 
 using namespace std;

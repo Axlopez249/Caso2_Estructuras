@@ -11,8 +11,8 @@
 #include <chrono>
 
 using namespace std;
-
 int main() {
+    
 
     //Creacion de la cola para las ordenes de los restaurantes
     Queue<orden> *listOrders = new List<orden>();
@@ -23,15 +23,15 @@ int main() {
 
     ConfigJson *config = new ConfigJson();
     Restaurant *resta = new Restaurant(listOrders);
-    simulador *mainSimu = new simulador(config, resta, colaEsperaCarro); 
+    simulador<int> *mainSimu = new simulador<int>(config, resta, colaEsperaCarro); 
 
-
-    std::thread generarCarrosThread(&simulador::generar_carros, mainSimu);
-    std::thread ingresoVentanillaThread(&simulador::ingreso_ventanilla, mainSimu);
+    
+    std::thread generarCarrosThread(&simulador<int>::generar_carros, mainSimu);
+    std::thread ingresoVentanillaThread(&simulador<int>::ingreso_ventanilla, mainSimu);
 
     generarCarrosThread.join();
     ingresoVentanillaThread.join();
-
+    
     
 
     /*

@@ -22,6 +22,7 @@ private:
     Queue<orden> *ordenesacocinar;
     int min;
     int max;
+    List<string> *acomodo;
 
 public:
     Restaurant(Queue<orden> *pOrderQueue)
@@ -81,6 +82,10 @@ public:
 
     void setMax(int pmax){
         max = pmax;
+    }
+
+    void setAcomodo(List<string> *pacomodo){
+        acomodo = pacomodo;
     }
 };
 

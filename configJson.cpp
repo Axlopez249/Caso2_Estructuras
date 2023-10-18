@@ -34,6 +34,7 @@ private:
     List<string> *comidasPesadas;
     List<string> *postres;
     List<string> *extras;
+    List<string> *acomodo;
 
     List<configTiempo> *tiempos = new List<configTiempo>();
 
@@ -49,6 +50,7 @@ public:
         postres = new List<string>();
         extras = new List<string>();
         comidasPesadas = new List<string>(); 
+        acomodo = new List<string>();
 
         //comienzo a extraer  la info del json
         std::ifstream file("JSON.json"); // Abre el archivo JSON
@@ -64,13 +66,16 @@ public:
                     postres->add(new string(postre));
                 }
                 for (const auto& comida : jsonData["ComidaPesada"]) {
-                    postres->add(new string(comida));
+                    comidasPesadas->add(new string(comida));
                 }
                 for (const auto& extra : jsonData["Extra"]) {
-                    postres->add(new string(extra));
+                    extras->add(new string(extra));
                 }
                 for (const auto& bebida : jsonData["Bebida"]) {
-                    postres->add(new string(bebida));
+                    bebidas->add(new string(bebida));
+                }
+                for (const auto& ordenAcomodo : jsonData["Acomodo"]) {
+                    acomodo->add(new string(ordenAcomodo));
                 }
             } catch (const std::exception& e) {
                 std::cerr << "Error: " << e.what() << std::endl;
@@ -168,6 +173,11 @@ public:
     List<string> *getextras()
     {
         return extras;
+    }
+
+    List<string> *getacomodo()
+    {
+        return acomodo;
     }
 
     int getMinTiempoFilaVentanilla()

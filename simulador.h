@@ -55,6 +55,7 @@ private:
     List<string> *comidasPesadas;
     List<string> *postres;
     List<string> *extras; 
+    List<string> *acomodo;
     //List<string> *stack = new List<string>;
     //Stack<string> *pilaBolsa = stack;
     configTiempo *tiempoTomandoOrden;
@@ -69,7 +70,7 @@ public:
         ventanillas = new List<ventanillaSolicitud>();
         lista_tiempos = pConfig->getConfigTiempo();
         colaCarro = colaEsperaCarro;
-
+        acomodo = pConfig->getacomodo();
         comidasPesadas = pConfig->getcomidasPesadas();
         bebidas = pConfig->getBebidas();
         postres = pConfig->getpostres();
@@ -106,6 +107,7 @@ public:
         //Aqui incluyo los valores en el restaurante
         currentRestaurant->setMax(tiempoRestaurant->max);
         currentRestaurant->setMin(tiempoRestaurant->min);
+        currentRestaurant->setAcomodo(acomodo);
     
         // aqui creo el hilo que va a generar los carros y le hago start
         

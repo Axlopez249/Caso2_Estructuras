@@ -13,6 +13,8 @@
     "ComidaPesada": ["Hamburguesa", "Taco", "Burrito", "Hot dog"],
     "Extra": ["Papas grandes", "Pure", "Papas medianas", "Platanos"],
     "Bebida": [ "Coca", "Fanta", "Te frio", "7Up"],
+    "Acomodo": ["Helado simple","Helado doble","Batido de fresa", "Helado especial","Hamburguesa", "Taco", "Burrito", "Hot dog",
+    "Papas grandes", "Pure", "Papas medianas", "Platanos","Coca", "Fanta", "Te frio", "7Up"],
     
     "Tiempos": [
         {

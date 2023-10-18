@@ -142,33 +142,35 @@ public:
 
     void ingreso_ventanilla(){
         while (true) {
+            int contadorLocal = 0;
             //std::lock_guard<std::mutex> lock(sim->getMutex());
             if (!colaCarro->isEmpty()) {
 
-                for (int i = 0; i < ventanillas->getSize(); ++i) {
-                    
-                    //Me daba error el lista.h porque no funcionaba el include de ventanilla por lo que no me leia el objeto
-                    Node<ventanillaSolicitud>* current = ventanillas->getFirst();
-                    int contadorLocal = 0;
-                    ventanillaSolicitud *ventanilla;
-                    
-                    while (current != nullptr) {
-                        if (i == contadorLocal) {
-                            //Se inserta en el nodo el carro
-                            //current->getData()->addCarro(carro);
-                            ventanilla = current->getData();
-                            ventanilla->addCarro(colaCarro->dequeue());
-                            break;
-                        }
-                        contadorLocal++;
-                        current = current->getNext();
+                //Me daba error el lista.h porque no funcionaba el include de ventanilla por lo que no me leia el objeto
+                Node<ventanillaSolicitud>* current = ventanillas->getFirst();
+                
+                ventanillaSolicitud *ventanilla;
+                int i = 0;
+                while (current != nullptr) {
+                    if (i == contadorLocal) {
+                        //Se inserta en el nodo el carro
+                        //current->getData()->addCarro(carro);
+                        ventanilla = current->getData();
+                        ventanilla->addCarro(colaCarro->dequeue());
+                        break;
                     }
-
-
-                    std::cout << "Ingresando carro a ventanilla " << i << std::endl;
+                    i++;
+                    current = current->getNext();
                 }
+
                 cout<<"hola"<<endl;
             }
+            contadorLocal++;
+            if (contadorLocal == 6)
+            {
+                contadorLocal == 0;
+            }
+            
             std::this_thread::sleep_for(std::chrono::milliseconds(randomOrden* 1000));
         }
 

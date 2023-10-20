@@ -17,7 +17,7 @@ int main() {
     //Creacion de la cola para las ordenes de los restaurantes
     Queue<orden> *listOrders = new List<orden>();
     Queue<Carro> *colaEsperaCarro = new List<Carro>();
-
+    
     //Listas para las comidas
 
 

@@ -29,7 +29,7 @@
 #include "ConfigSimulacion.h"
 #include "configTiempo.h"
 #include "Alimento.h"
-#include "restaurant.h"
+//#include "restaurant.h" Esto no creo que se ocupe aqui
 #include "carro.h"
 #include "ventanillaSolicitud.h"
 #include "Node.h"
@@ -55,8 +55,9 @@ private:
     List<string> *comidasPesadas;
     List<string> *postres;
     List<string> *extras; 
+    List<string> *acomodo;
     //List<string> *stack = new List<string>;
-    //Stack<string> *pilaBolsa = stack;
+    
     configTiempo *tiempoTomandoOrden;
     Queue<Carro> *colaCarro;
     
@@ -69,7 +70,7 @@ public:
         ventanillas = new List<ventanillaSolicitud>();
         lista_tiempos = pConfig->getConfigTiempo();
         colaCarro = colaEsperaCarro;
-
+        acomodo = pConfig->getacomodo();
         comidasPesadas = pConfig->getcomidasPesadas();
         bebidas = pConfig->getBebidas();
         postres = pConfig->getpostres();
@@ -106,6 +107,7 @@ public:
         //Aqui incluyo los valores en el restaurante
         currentRestaurant->setMax(tiempoRestaurant->max);
         currentRestaurant->setMin(tiempoRestaurant->min);
+        currentRestaurant->setAcomodo(acomodo);
     
         // aqui creo el hilo que va a generar los carros y le hago start
         
@@ -142,79 +144,50 @@ public:
 
     void ingreso_ventanilla(){
         while (true) {
+            int contadorLocal = 0;
             //std::lock_guard<std::mutex> lock(sim->getMutex());
             if (!colaCarro->isEmpty()) {
-                //quitar esto
-                for (int i = 0; i < ventanillas->getSize(); ++i) {
-                    
-                    //Me daba error el lista.h porque no funcionaba el include de ventanilla por lo que no me leia el objeto
-                    Node<ventanillaSolicitud>* current = ventanillas->getFirst();
-                    int contadorLocal = 0;
-                    ventanillaSolicitud *ventanilla;
-                    
-                    while (current != nullptr) {
-                        if (i == contadorLocal) {
-                            //Se inserta en el nodo el carro
-                            //current->getData()->addCarro(carro);
-                            ventanilla = current->getData();
-                            ventanilla->addCarro(colaCarro->dequeue());
-                            break;
-                        }
-                        contadorLocal++;
-                        current = current->getNext();
+
+                //Me daba error el lista.h porque no funcionaba el include de ventanilla por lo que no me leia el objeto
+                Node<ventanillaSolicitud>* current = ventanillas->getFirst();
+                
+                ventanillaSolicitud *ventanilla;
+                int i = 0;
+                while (current != nullptr) {
+                    if (i == contadorLocal) {
+                        //Se inserta en el nodo el carro
+                        //current->getData()->addCarro(carro);
+                        ventanilla = current->getData();
+                        ventanilla->addCarro(colaCarro->dequeue());
+                        break;
                     }
-                    std::cout << "Ingresando carro a ventanilla " << i << std::endl;
+                    i++;
+                    current = current->getNext();
                 }
-                //cout<<"hola"<<endl;
+
+                cout<<"hola"<<endl;
             }
+            contadorLocal++;
+            if (contadorLocal == 6)
+            {
+                contadorLocal == 0;
+            }
+            
             std::this_thread::sleep_for(std::chrono::milliseconds(randomOrden* 1000));
         }
 
     }
 
-/*
-    void ingreso_restaurant(vector<string> orden)
-    {
-        ConfigJson comidas;
-        bebidas = comidas.getBebidas();
-        comidasPesadas = comidas.getcomidasPesadas();
-        postres = comidas.getpostres();
-        extras = comidas.getextras();
-        
-        //For para agregar las comidas pesadas
-        for (const string& comida : orden){
-            if (find(comidasPesadas.begin(), comidasPesadas.end(), comida) != comidasPesadas.end()) {
-                pilaBolsa.push(comida);
-            }
-        }
-
-        //For para agregar los extras        
-        for (const string& comida : orden){
-            if (find(extras.begin(), extras.end(), comida) != extras.end()){
-                pilaBolsa->push(comida);
-            }
-            
-        }
-        
-        //For para agregar los postres
-        for (const string& comida : orden){
-            if (find(postres.begin(), postres.end(), comida) != postres.end()){
-                pilaBolsa->push(comida);
-            }
-        }
-
-        //For para agregar las bebidas
-        for (const string& comida : orden){
-            if (find(bebidas.begin(), bebidas.end(), comida) != bebidas.end()){
-                pilaBolsa->push(comida);
-            }
-        }
+    ConfigJson getConfig(){
+        return config;
     }
+
+    
 
     void tiempo_ventanilla(vector<Carro> &pCarro)
     {
         // Se toma el tiempo de atencion de cada carro
-    }*/
+    }
 };
 
 #endif

@@ -144,7 +144,7 @@ public:
         while (true) {
             //std::lock_guard<std::mutex> lock(sim->getMutex());
             if (!colaCarro->isEmpty()) {
-
+                //quitar esto
                 for (int i = 0; i < ventanillas->getSize(); ++i) {
                     
                     //Me daba error el lista.h porque no funcionaba el include de ventanilla por lo que no me leia el objeto
@@ -163,11 +163,9 @@ public:
                         contadorLocal++;
                         current = current->getNext();
                     }
-
-
                     std::cout << "Ingresando carro a ventanilla " << i << std::endl;
                 }
-                cout<<"hola"<<endl;
+                //cout<<"hola"<<endl;
             }
             std::this_thread::sleep_for(std::chrono::milliseconds(randomOrden* 1000));
         }

@@ -64,13 +64,13 @@ public:
                     postres->add(new string(postre));
                 }
                 for (const auto& comida : jsonData["ComidaPesada"]) {
-                    postres->add(new string(comida));
+                    comidasPesadas->add(new string(comida));
                 }
                 for (const auto& extra : jsonData["Extra"]) {
-                    postres->add(new string(extra));
+                    extras->add(new string(extra));
                 }
                 for (const auto& bebida : jsonData["Bebida"]) {
-                    postres->add(new string(bebida));
+                    bebidas->add(new string(bebida));
                 }
             } catch (const std::exception& e) {
                 std::cerr << "Error: " << e.what() << std::endl;

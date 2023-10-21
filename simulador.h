@@ -56,7 +56,8 @@ private:
     List<string> *postres;
     List<string> *extras; 
     List<string> *acomodo;
-    //List<string> *stack = new List<string>;
+
+    
     
     configTiempo *tiempoTomandoOrden;
     Queue<Carro> *colaCarro;
@@ -177,6 +178,7 @@ public:
         }
 
     }
+
 
 
 

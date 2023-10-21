@@ -6,7 +6,8 @@
             "interval" : 3,
             "TiempoMin": 1,
             "TiempoMax": 3
-        },
+        }
+    ,
 
     "Postres": [ "Helado simple","Helado doble","Batido de fresa", "Helado especial"],
     "ComidaPesada": ["Hamburguesa", "Taco", "Burrito", "Hot dog"],

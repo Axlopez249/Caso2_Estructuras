@@ -5,11 +5,17 @@
 #include <string>
 #include <cstdlib>
 #include <ctime>
+#include <string>
 
 #include <thread>
 #include <chrono>
 #include <random>
 
+#include <vector>
+#include <algorithm>
+#include <map>
+
+#include "configJson.cpp"
 #include "lista.h"
 #include "orden.h"
 
@@ -22,11 +28,16 @@ private:
     Queue<orden> *ordenesacocinar;
     int min;
     int max;
+    string elemento;
+    string elementoOrden;
     List<string> *acomodo;
+
     List<string> *bebidas;
     List<string> *comidasPesadas;
     List<string> *postres;
     List<string> *extras; 
+
+    List<string> *stack = new List<string>;
     Stack<string> *pilaBolsa = stack;
 
 public:
@@ -81,45 +92,28 @@ public:
     }
 
 
-
-    List<string> ingreso_restaurant(vector<string> orden)
-    {
+    //Voy a revisar mejor esto
+    void ingreso_restaurant(vector<string> orden){
         ConfigJson comidas;
         bebidas = comidas.getBebidas();
         comidasPesadas = comidas.getcomidasPesadas();
         postres = comidas.getpostres();
         extras = comidas.getextras();
+        acomodo = comidas.getacomodo();
         
-        //For para agregar las comidas pesadas
-        for (const string& comida : orden){
-            if (find(comidasPesadas.begin(), comidasPesadas.end(), comida) != comidasPesadas.end()) {
-                pilaBolsa.push(comida);
+        for (int i = 0; i < acomodo->getSize(); ++1){
+            elemento = acomodo->find(i);
+            if (elemento != nullptr){
+                for (int j = 0; j < orden.size(); ++j){
+                    elementoOrden = orden[j];
+                    if (elemento == elementoOrden){
+                        pilaBolsa->push(new string(elementoOrden));
+                    }
+                }
             }
         }
-
-        //For para agregar los extras        
-        for (const string& comida : orden){
-            if (find(extras.begin(), extras.end(), comida) != extras.end()){
-                pilaBolsa->push(comida);
-            }
-            
-        }
-        
-        //For para agregar los postres
-        for (const string& comida : orden){
-            if (find(postres.begin(), postres.end(), comida) != postres.end()){
-                pilaBolsa->push(comida);
-            }
-        }
-
-        //For para agregar las bebidas
-        for (const string& comida : orden){
-            if (find(bebidas.begin(), bebidas.end(), comida) != bebidas.end()){
-                pilaBolsa->push(comida);
-            }
-        }
-
-        return pilaBolsa;
+        cout << "Lista Acomodada:" << endl;
+        pilaBolsa->printValues();//Da error
     }
 
     void setMin(int pmin){

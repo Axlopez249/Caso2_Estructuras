@@ -12,7 +12,6 @@
 
 #include "lista.h"
 #include "orden.h"
-#include "simulador.h"
 
 
 using namespace std;
@@ -24,12 +23,11 @@ private:
     int min;
     int max;
     List<string> *acomodo;
-    Stack<string> *pilaBolsa = stack;
     List<string> *bebidas;
     List<string> *comidasPesadas;
     List<string> *postres;
     List<string> *extras; 
-    List<string> *acomodo;
+    Stack<string> *pilaBolsa = stack;
 
 public:
     Restaurant(Queue<orden> *pOrderQueue)
@@ -82,47 +80,47 @@ public:
 
     }
 
-    vector<string> ingreso_restaurant(vector<string> orden)
-        {
-            
-            ConfigJson comidas;
-            bebidas = comidas.getBebidas();
-            comidasPesadas = comidas.getcomidasPesadas();
-            postres = comidas.getpostres();
-            extras = comidas.getextras();
-            
-            //For para agregar las comidas pesadas
-            for (const string& comida : orden){
-                if (find(comidasPesadas.begin(), comidasPesadas.end(), comida) != comidasPesadas.end()) {
-                    pilaBolsa.push(comida);
-                }
-            }
 
-            //For para agregar los extras        
-            for (const string& comida : orden){
-                if (find(extras.begin(), extras.end(), comida) != extras.end()){
-                    pilaBolsa->push(comida);
-                }
-                
-            }
-            
-            //For para agregar los postres
-            for (const string& comida : orden){
-                if (find(postres.begin(), postres.end(), comida) != postres.end()){
-                    pilaBolsa->push(comida);
-                }
-            }
 
-            //For para agregar las bebidas
-            for (const string& comida : orden){
-                if (find(bebidas.begin(), bebidas.end(), comida) != bebidas.end()){
-                    pilaBolsa->push(comida);
-                }
+    List<string> ingreso_restaurant(vector<string> orden)
+    {
+        ConfigJson comidas;
+        bebidas = comidas.getBebidas();
+        comidasPesadas = comidas.getcomidasPesadas();
+        postres = comidas.getpostres();
+        extras = comidas.getextras();
+        
+        //For para agregar las comidas pesadas
+        for (const string& comida : orden){
+            if (find(comidasPesadas.begin(), comidasPesadas.end(), comida) != comidasPesadas.end()) {
+                pilaBolsa.push(comida);
             }
-            return pilaBolsa;
         }
 
+        //For para agregar los extras        
+        for (const string& comida : orden){
+            if (find(extras.begin(), extras.end(), comida) != extras.end()){
+                pilaBolsa->push(comida);
+            }
+            
+        }
+        
+        //For para agregar los postres
+        for (const string& comida : orden){
+            if (find(postres.begin(), postres.end(), comida) != postres.end()){
+                pilaBolsa->push(comida);
+            }
+        }
 
+        //For para agregar las bebidas
+        for (const string& comida : orden){
+            if (find(bebidas.begin(), bebidas.end(), comida) != bebidas.end()){
+                pilaBolsa->push(comida);
+            }
+        }
+
+        return pilaBolsa;
+    }
 
     void setMin(int pmin){
         min = pmin;

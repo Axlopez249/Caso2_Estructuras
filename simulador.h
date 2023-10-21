@@ -29,7 +29,7 @@
 #include "ConfigSimulacion.h"
 #include "configTiempo.h"
 #include "Alimento.h"
-//#include "restaurant.h" Esto no creo que se ocupe aqui
+#include "restaurant.h"
 #include "carro.h"
 #include "ventanillaSolicitud.h"
 #include "Node.h"
@@ -178,11 +178,7 @@ public:
 
     }
 
-    ConfigJson getConfig(){
-        return config;
-    }
 
-    
 
     void tiempo_ventanilla(vector<Carro> &pCarro)
     {

@@ -70,7 +70,7 @@ public:
             if (!carrosEsperando->isEmpty())
             {
                 Carro *carro_nuevo = carrosEsperando->dequeue();
-            .
+            
             //Parte donde se crea la orden 
             //La cantidad de objetos de las comida, bebidas y eso de cada lista es de 4 entonces se crea una funcion 
             //en el lista.h que tome un numero aleatorio

@@ -37,7 +37,7 @@ private:
     List<string> *postres;
     List<string> *extras; 
 
-    Stack<string> *pilaBolsa;
+
 
 public:
     Restaurant(Queue<orden> *pOrderQueue)
@@ -80,8 +80,13 @@ public:
                 ordenes.push_back(ordenExtraida->getExtra);
                 ordenes.push_back(ordenExtraida->getBebida);
 
-                ingreso_restaurant(ordenes);
+                //Se crea una pila por orden
+                Stack<string> *pilaBolsa = new List<string>();
+                //Se llena la pila
+                ingreso_restaurant(ordenes, pilaBolsa);
 
+
+                //Luego ya se puede imprimir lo que pidio ese carro con la fe de que este guardado todo bien
                 cout<< "Sacando orden del restaurante"<<endl;
 
                 
@@ -100,22 +105,19 @@ public:
 
 
     //Voy a revisar mejor esto
-    void ingreso_restaurant(vector<vector<string>> porden){
+    void ingreso_restaurant(vector<vector<string>> porden, Stack<string> *ppilaBolsa){
         ConfigJson comidas;
         bebidas = comidas.getBebidas();
         comidasPesadas = comidas.getcomidasPesadas();
         postres = comidas.getpostres();
         extras = comidas.getextras();
         
+        
 
         //elemento no tiene tipo de nada, me imagino que como la lista acomodo tiene string entonces lo que saque sera un puntero string
         for (int i = 0; i < acomodo->getSize(); ++1){
             string *elemento = acomodo->find(i);
-
-
-
             if (elemento != nullptr){
-
                 for (int j = 0; j < porden.size(); ++j){
                     //se obtiene cada vector
                     vector<string> elementoOrden = porden[j];
@@ -126,19 +128,13 @@ public:
                         //Extraigo cada valor y comparo a ver si está
                         //si lo encuentra lo mando a la bola con el push
                         if (*elemento == elementoOrden[i]){
-                            pilaBolsa->push(new string(elementoOrden));
+                            ppilaBolsa->push(new string(elementoOrden));
 
                             //mi idea es volver a poner el j=0 para que comience la comparacion desde el inicio porque en los movimientos que hizo buscando
                             //pudo haber dejado alguna comida que se necesita entonces es mejor de esa manera
                             j = 0;
                         }
                     }
-                    
-                    
-
-
-
-
                 }
             }
         }
@@ -161,9 +157,6 @@ public:
         acomodo = pacomodo;
     }
 
-    void setPilaBolsa(Stack<string> *ppilaBolsa){
-        pilaBolsa = ppilaBolsa;
-    }
 };
 
 #endif

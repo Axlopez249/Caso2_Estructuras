@@ -37,8 +37,7 @@ private:
     List<string> *postres;
     List<string> *extras; 
 
-    List<string> *stack = new List<string>;
-    Stack<string> *pilaBolsa = stack;
+    Stack<string> *pilaBolsa;
 
 public:
     Restaurant(Queue<orden> *pOrderQueue)
@@ -75,6 +74,14 @@ public:
 
                 //o tambien se puede utilizar la idea que usted tenia que sinceramente no sé cómo funciona
 
+                vector<vector<string>> ordenes;
+                ordenes.push_back(ordenExtraida->getPostre);
+                ordenes.push_back(ordenExtraida->getComida);
+                ordenes.push_back(ordenExtraida->getExtra);
+                ordenes.push_back(ordenExtraida->getBebida);
+
+                ingreso_restaurant(ordenes);
+
                 cout<< "Sacando orden del restaurante"<<endl;
 
                 
@@ -93,27 +100,52 @@ public:
 
 
     //Voy a revisar mejor esto
-    void ingreso_restaurant(vector<string> orden){
+    void ingreso_restaurant(vector<vector<string>> porden){
         ConfigJson comidas;
         bebidas = comidas.getBebidas();
         comidasPesadas = comidas.getcomidasPesadas();
         postres = comidas.getpostres();
         extras = comidas.getextras();
-        acomodo = comidas.getacomodo();
         
+
+        //elemento no tiene tipo de nada, me imagino que como la lista acomodo tiene string entonces lo que saque sera un puntero string
         for (int i = 0; i < acomodo->getSize(); ++1){
-            elemento = acomodo->find(i);
+            string *elemento = acomodo->find(i);
+
+
+
             if (elemento != nullptr){
-                for (int j = 0; j < orden.size(); ++j){
-                    elementoOrden = orden[j];
-                    if (elemento == elementoOrden){
-                        pilaBolsa->push(new string(elementoOrden));
+
+                for (int j = 0; j < porden.size(); ++j){
+                    //se obtiene cada vector
+                    vector<string> elementoOrden = porden[j];
+                    //se recorre ese vector para compararlo con el elemento que tengo
+                    //hasta que lo encuentre en alguno de todos los vectores, entonces lo mete a la pila
+                    for (int i = 0; i < elementoOrden.size(); i++)
+                    {
+                        //Extraigo cada valor y comparo a ver si está
+                        //si lo encuentra lo mando a la bola con el push
+                        if (*elemento == elementoOrden[i]){
+                            pilaBolsa->push(new string(elementoOrden));
+
+                            //mi idea es volver a poner el j=0 para que comience la comparacion desde el inicio porque en los movimientos que hizo buscando
+                            //pudo haber dejado alguna comida que se necesita entonces es mejor de esa manera
+                            j = 0;
+                        }
                     }
+                    
+                    
+
+
+
+
                 }
             }
         }
         cout << "Lista Acomodada:" << endl;
-        pilaBolsa->printValues();//Da error
+
+        //esto no va a funcionar porque esa funcion solo es para listas, no para pilas ni colas
+        //pilaBolsa->printValues();//Da error
     }
 
     void setMin(int pmin){
@@ -127,6 +159,10 @@ public:
 
     void setAcomodo(List<string> *pacomodo){
         acomodo = pacomodo;
+    }
+
+    void setPilaBolsa(Stack<string> *ppilaBolsa){
+        pilaBolsa = ppilaBolsa;
     }
 };
 

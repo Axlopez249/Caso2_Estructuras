@@ -32,6 +32,7 @@ int main() {
 
     // Acomodar la lista de entrada según la lista de orden predefinida
     acomodarLista(listaEntrante);
+    //listaEntrante->acomodarLista( <orden(para ordenarlo con esta lista que se envia)> );
 
     // Imprimir la lista acomodada
     cout << "Lista Acomodada:" << endl;

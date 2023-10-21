@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include "carro.h"
+#include <vector>
 
 using namespace std;
 
@@ -10,15 +11,15 @@ class orden
 {
 private:
     Carro* carro;
-    string comida;
-    string bebida;
-    string postre;
-    string extra;
+    vector<string> comida;
+    vector<string> bebida;
+    vector<string> postre;
+    vector<string> extra;
     
     // estado de orden
 
 public:
-    orden(Carro* pcarro, string pcomida, string pbebida, string ppostre, string pextra){
+    orden(Carro* pcarro, vector<string> pcomida, vector<string> pbebida, vector<string> ppostre, vector<string> pextra){
         
         
         //Se crea una orden
@@ -36,19 +37,19 @@ public:
         return carro;
     }
 
-    string getBebida(){
+    vector<string> getBebida(){
         return bebida;
     }
 
-    string getExtra(){
+    vector<string> getExtra(){
         return extra;
     }
 
-    string getPostre(){
+    vector<string> getPostre(){
         return postre;
     }
 
-    string getComida(){
+    vector<string> getComida(){
         return comida;
     }
 

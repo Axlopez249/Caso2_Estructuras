@@ -7,6 +7,7 @@
 #include <thread>
 #include <chrono>
 #include <functional>
+#include <vector>
 
 #include "lista.h"
 #include "restaurant.h"
@@ -71,27 +72,51 @@ public:
             {
                 Carro *carro_nuevo = carrosEsperando->dequeue();
             
-            //Parte donde se crea la orden 
-            //La cantidad de objetos de las comida, bebidas y eso de cada lista es de 4 entonces se crea una funcion 
-            //en el lista.h que tome un numero aleatorio
-            //y recorra la lista la cantidad de veces de ese numero y luego retorna su data para ir construyendo la orden
-            //Entonces el numero random serían 1-4 por lista
-            //Se saca random para para realizar cada cierto tiempo
-            int comida = distribution(generator);
-            int bebida = distribution(generator);
-            int extra = distribution(generator);
-            int postre = distribution(generator);
+            //Estos numeros aleatorios que se generar aqui son la cantidad de ordenes que van a tener cada vector, es decir puede ser que por vuelta
+            //el vector de comidaPesada tenga 2 ordenes y así con los 4
+            //aqui va a ser la cantidad
+
+            int cantComida = distribution(generator);
+            int cantBebida = distribution(generator);
+            int cantExtra = distribution(generator);
+            int cantPostre = distribution(generator);
+
+
+            //hacer un for de la cantidad de cada uno y llamar a una funcion
+            //Se defininen los vectores donde se van a guardar las partes de las ordenes
+            vector<string> comidaPesada;
+            vector<string> extraOrden;
+            vector<string> postreOrden;
+            vector<string> bebidaOrden;
+
+            //Un for de cada uno que recorre la cantidad antes mencionanada y se genera otro numero por vuelta que me escoje una del total enviando un numero
+            //eso llama la funcion de abajo que ocupa ese numero, una lista y el vector para que se le agregue la cosa que pide
+            for (int i = 0; i < cantComida; i++)
+            {
+                int comida = distribution(generator);
+                generarParteOrden(comida, comidasPesadas, comidaPesada);
+            }
+
+            for (int i = 0; i < cantBebida; i++)
+            {
+                int bebida = distribution(generator);
+                generarParteOrden(bebida, bebidas, extraOrden);
+            }
+
+            for (int i = 0; i < cantExtra; i++)
+            {
+                int extra = distribution(generator);
+                generarParteOrden(extra, extras, postreOrden);
+            }
+
+            for (int i = 0; i < cantPostre; i++)
+            {
+                int postre = distribution(generator);
+                generarParteOrden(postre, postres, bebidaOrden);
+            }
             
-            //Se llama la funcion
-            //Se supone que retorna un puntero de lo que sea, pero ya se sabe que es string
             
-            string comida_orden = comidasPesadas->getDataRandom(comida);
-            string bebida_orden = comidasPesadas->getDataRandom(bebida);
-            string extra_orden = comidasPesadas->getDataRandom(extra);
-            string postre_orden = comidasPesadas->getDataRandom(postre);
-            
-            
-            orden *ordenNueva = new orden(carro_nuevo, comida_orden, bebida_orden, postre_orden, extra_orden);
+            orden *ordenNueva = new orden(carro_nuevo, comidaPesada, extraOrden, postreOrden, bebidaOrden);
             currentRestaurant->addOrder(ordenNueva);
 
             cout<<"Agregado al restaurante"<<endl;
@@ -113,6 +138,10 @@ public:
         // currentRestaurant->addOrder();
         // se procesa el elemento carro con su orden
         // Luego se usa el .h restaurant para prepararla
+    }
+
+    void generarParteOrden(int cantParteOrden, List<string> pListaParteOrden, vector<string> pvectorParteOrden){
+        pvectotParteOrden.push_back(pListaParteOrden->getDataRandom(cantParteOrden));
     }
 
     void setRestaurant(Restaurant *current)

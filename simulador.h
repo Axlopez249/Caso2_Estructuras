@@ -61,7 +61,6 @@ private:
     
     configTiempo *tiempoTomandoOrden;
     Queue<Carro> *colaCarro;
-    Stack<string> *pilaBolsa;
     
 public:
     simulador(ConfigJson *pConfig, Restaurant *currentRestaurant, Queue<Carro>*colaEsperaCarro)
@@ -77,12 +76,8 @@ public:
         bebidas = pConfig->getBebidas();
         postres = pConfig->getpostres();
         extras = pConfig->getextras();
-        pilaBolsa = new List<string>();
 
-        
-        
- 
-        
+
 
         //LLamo esta funcion para saber cual es el tiempo que debo extraer para crear las ventanillas
         configTiempo *tiempoVentanilla = lista_tiempos->searchValue("Haciendo fila");
@@ -111,7 +106,6 @@ public:
         currentRestaurant->setMax(tiempoRestaurant->max);
         currentRestaurant->setMin(tiempoRestaurant->min);
         currentRestaurant->setAcomodo(acomodo);
-        currentRestaurant->setPilaBolsa(pilaBolsa);
     
         // aqui creo el hilo que va a generar los carros y le hago start
         

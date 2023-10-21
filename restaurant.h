@@ -64,14 +64,14 @@ public:
 
                 //o tambien se puede utilizar la idea que usted tenia que sinceramente no sé cómo funciona
 
-                
+                cout<< "Sacando orden del restaurante"<<endl;
 
                 
 
                 
             }
             int numeroAleatorio = distribution(generator);
-            std::this_thread::sleep_for(std::chrono::milliseconds(numeroAleatorio*60*1000)); 
+            std::this_thread::sleep_for(std::chrono::milliseconds(numeroAleatorio*1000)); 
         }
         
         // siempre y cuando no este vacia la cola de ordenes

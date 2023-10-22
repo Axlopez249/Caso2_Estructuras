@@ -75,10 +75,10 @@ public:
                 //o tambien se puede utilizar la idea que usted tenia que sinceramente no sé cómo funciona
 
                 vector<vector<string>> ordenes;
-                ordenes.push_back(ordenExtraida->getPostre);
-                ordenes.push_back(ordenExtraida->getComida);
-                ordenes.push_back(ordenExtraida->getExtra);
-                ordenes.push_back(ordenExtraida->getBebida);
+                ordenes.push_back(ordenExtraida->getPostre());
+                ordenes.push_back(ordenExtraida->getComida());
+                ordenes.push_back(ordenExtraida->getExtra());
+                ordenes.push_back(ordenExtraida->getBebida());
 
                 //Se crea una pila por orden
                 Stack<string> *pilaBolsa = new List<string>();
@@ -115,10 +115,10 @@ public:
         
 
         //elemento no tiene tipo de nada, me imagino que como la lista acomodo tiene string entonces lo que saque sera un puntero string
-        for (int i = 0; i < acomodo->getSize(); ++1){
+        for (int i = 0; i < acomodo->getSize(); i++){
             string *elemento = acomodo->find(i);
             if (elemento != nullptr){
-                for (int j = 0; j < porden.size(); ++j){
+                for (int j = 0; j < porden.size(); j++){
                     //se obtiene cada vector
                     vector<string> elementoOrden = porden[j];
                     //se recorre ese vector para compararlo con el elemento que tengo
@@ -128,7 +128,7 @@ public:
                         //Extraigo cada valor y comparo a ver si está
                         //si lo encuentra lo mando a la bola con el push
                         if (*elemento == elementoOrden[i]){
-                            ppilaBolsa->push(new string(elementoOrden));
+                            ppilaBolsa->push(elemento);
 
                             //mi idea es volver a poner el j=0 para que comience la comparacion desde el inicio porque en los movimientos que hizo buscando
                             //pudo haber dejado alguna comida que se necesita entonces es mejor de esa manera

@@ -120,6 +120,7 @@ public:
                 }
                 
                 //sacar para generarcarros
+                
                 currentConfigGeneradorCarros.cantidad = jsonData["GeneradorCarros"]["Cantidad"].get<int>();
                 currentConfigGeneradorCarros.intervalo = jsonData["GeneradorCarros"]["interval"].get<int>();
                 currentConfigGeneradorCarros.tiempoMax = jsonData["GeneradorCarros"]["TiempoMax"].get<int>();

@@ -140,8 +140,8 @@ public:
         // Luego se usa el .h restaurant para prepararla
     }
 
-    void generarParteOrden(int cantParteOrden, List<string> pListaParteOrden, vector<string> pvectorParteOrden){
-        pvectotParteOrden.push_back(pListaParteOrden->getDataRandom(cantParteOrden));
+    void generarParteOrden(int cantParteOrden, List<string> *pListaParteOrden, vector<string> pvectorParteOrden){
+        pvectorParteOrden.push_back(pListaParteOrden->getDataRandom(cantParteOrden));
     }
 
     void setRestaurant(Restaurant *current)

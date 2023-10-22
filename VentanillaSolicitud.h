@@ -119,7 +119,7 @@ public:
             orden *ordenNueva = new orden(carro_nuevo, comidaPesada, extraOrden, postreOrden, bebidaOrden);
             currentRestaurant->addOrder(ordenNueva);
 
-            cout<<"Creando orden y agregandose al restaurante"<<endl;
+            //cout<<"Creando orden y agregandose al restaurante"<<endl;
 
             
             

@@ -90,6 +90,14 @@ public:
 
                 //Luego ya se puede imprimir lo que pidio ese carro con la fe de que este guardado todo bien
                 cout<< "Sacando orden del restaurante"<<endl;
+                cout<<""<<endl;
+                while (!pilaBolsa->isEmpty())
+                {
+                    cout<<*pilaBolsa->pop()<<endl;
+                }
+                
+
+
 
                 
 
@@ -117,29 +125,31 @@ public:
         
 
         //elemento no tiene tipo de nada, me imagino que como la lista acomodo tiene string entonces lo que saque sera un puntero string
-        for (int i = 0; i < acomodo->getSize(); i++){
+        for (int i = 0; i < acomodo->getSize(); i++) {
             string *elemento = acomodo->find(i);
-            if (elemento != nullptr){
-                for (int j = 0; j < porden.size(); j++){
-                    //se obtiene cada vector
-                    vector<string> elementoOrden = porden[j];
-                    //se recorre ese vector para compararlo con el elemento que tengo
-                    //hasta que lo encuentre en alguno de todos los vectores, entonces lo mete a la pila
-                    for (int i = 0; i < elementoOrden.size(); i++)
-                    {
-                        //Extraigo cada valor y comparo a ver si está
-                        //si lo encuentra lo mando a la bola con el push
-                        if (*elemento == elementoOrden[i]){
+            if (elemento != nullptr) {
+                for (vector<string> &elementoVector: porden) {
+                    // Se obtiene cada vector
+                    // Se recorre ese vector para compararlo con el elemento que tengo
+                    // Hasta que lo encuentre en alguno de todos los vectores, entonces lo mete a la pila
+                    bool encontrado = false;
+                    for (string &elementoString: elementoVector) {
+                        // Extraigo cada valor y comparo a ver si está
+                        // Si lo encuentra lo mando a la pila con el push
+                        if (*elemento == elementoString) {
                             ppilaBolsa->push(elemento);
-
-                            //mi idea es volver a poner el j=0 para que comience la comparacion desde el inicio porque en los movimientos que hizo buscando
-                            //pudo haber dejado alguna comida que se necesita entonces es mejor de esa manera
-                            j = 0;
+                            encontrado = true;
+                            break;  // Sale del bucle interno
                         }
+                    }
+                    if (encontrado) {
+                        // Si se encuentra el elemento en el vector actual, continuar con el siguiente elemento en el bucle externo
+                        break;
                     }
                 }
             }
         }
+
         cout << "Lista Acomodada:" << endl;
 
         //esto no va a funcionar porque esa funcion solo es para listas, no para pilas ni colas

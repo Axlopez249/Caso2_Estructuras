@@ -66,14 +66,13 @@ public:
             {
                 orden *ordenExtraida = ordenesacocinar->dequeue();
                 //tengo la orden a mano
-                
                 //Aqui hay que hacer algo con esa orden
                 //podria ser que agreguemos un orden especifcico en el json y lo extraigamos como lista de string
                 //para luego compararla y crear una pila 
                 //esa pila ya finalmente se puede utilizar luego para imprimir la informacion del carro que ya pasó
 
                 //o tambien se puede utilizar la idea que usted tenia que sinceramente no sé cómo funciona
-
+                   
                 vector<vector<string>> ordenes;
                 ordenes.push_back(ordenExtraida->getPostre());
                 ordenes.push_back(ordenExtraida->getComida());
@@ -89,13 +88,14 @@ public:
 
 
                 //Luego ya se puede imprimir lo que pidio ese carro con la fe de que este guardado todo bien
-                cout<< "Sacando orden del restaurante"<<endl;
+                cout<<""<<endl;
+                cout<< "Entregando bolsa de comida"<<endl;
                 cout<<""<<endl;
                 while (!pilaBolsa->isEmpty())
                 {
                     cout<<*pilaBolsa->pop()<<endl;
                 }
-                
+                cout<<""<<endl;
 
 
 
@@ -139,7 +139,9 @@ public:
                         if (*elemento == elementoString) {
                             ppilaBolsa->push(elemento);
                             encontrado = true;
+                        
                             break;  // Sale del bucle interno
+                            
                         }
                     }
                     if (encontrado) {
@@ -151,7 +153,7 @@ public:
         }
 
         cout << "Lista Acomodada:" << endl;
-
+        
         //esto no va a funcionar porque esa funcion solo es para listas, no para pilas ni colas
         //pilaBolsa->printValues();//Da error
     }

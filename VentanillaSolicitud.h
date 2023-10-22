@@ -55,6 +55,7 @@ public:
 
     void addCarro(Carro *pNewCarro)
     {
+        cout<<"Carro "<<pNewCarro->get_id()<<" ingresando a espera"<<endl;
         carrosEsperando->enqueue(pNewCarro);
     }
 
@@ -115,7 +116,9 @@ public:
                 postreOrden.push_back(postres->getDataRandom(postre));
             }
             
-            
+            cout<<""<<endl;
+            cout<<"Orden para el carro "<<carro_nuevo->get_id()<<" lista"<<endl;
+            cout<<""<<endl;
             orden *ordenNueva = new orden(carro_nuevo, comidaPesada, extraOrden, postreOrden, bebidaOrden);
             currentRestaurant->addOrder(ordenNueva);
 

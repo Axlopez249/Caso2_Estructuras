@@ -125,15 +125,21 @@ public:
 
 
     void generar_carros() {
-        int carroID = 1;
+        int contCtotales = 0;
         while (true) {
+            int carroID = 1;
             //std::lock_guard<std::mutex> lock(sim->getMutex());
-            for (int i = 0; i < configCarros.cantidad; i++)
+            for (int i = 1; i < configCarros.cantidad; i++)
             {
                 Carro* carro = new Carro(carroID++);
                 colaCarro->enqueue(carro);
             }
-            //cout<<"Se generaron 100 carros"<<endl;
+            contCtotales += carroID;
+            cout<<"Se generaron " << carroID << " carros nuevos"<<endl;
+            cout<<" "<<endl;
+            cout<<"Se han generado " << contCtotales << " carros"<<endl;
+            cout<<""<<endl;
+            
             std::this_thread::sleep_for(std::chrono::milliseconds(configCarros.intervalo * 1000));
         }
     }
@@ -163,7 +169,7 @@ public:
                     current = current->getNext();
                 }
 
-                //cout<<"Ingresando carro a la ventanilla"<<endl;
+                cout<<"Ingresando carro a la ventanilla"<<endl;
             }
             contadorLocal++;
             if (contadorLocal == 6)
@@ -179,10 +185,7 @@ public:
 
 
 
-    void tiempo_ventanilla(vector<Carro> &pCarro)
-    {
-        // Se toma el tiempo de atencion de cada carro
-    }
+
 };
 
 #endif

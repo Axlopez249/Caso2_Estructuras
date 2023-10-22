@@ -94,32 +94,38 @@ public:
             for (int i = 0; i < cantComida; i++)
             {
                 int comida = distribution(generator);
-                generarParteOrden(comida, comidasPesadas, comidaPesada);
+                comidaPesada.push_back(comidasPesadas->getDataRandom(comida));
             }
 
             for (int i = 0; i < cantBebida; i++)
             {
                 int bebida = distribution(generator);
-                generarParteOrden(bebida, bebidas, extraOrden);
+                bebidaOrden.push_back(bebidas->getDataRandom(bebida));
             }
 
             for (int i = 0; i < cantExtra; i++)
             {
                 int extra = distribution(generator);
-                generarParteOrden(extra, extras, postreOrden);
+                extraOrden.push_back(extras->getDataRandom(extra));
             }
 
             for (int i = 0; i < cantPostre; i++)
             {
                 int postre = distribution(generator);
-                generarParteOrden(postre, postres, bebidaOrden);
+                postreOrden.push_back(postres->getDataRandom(postre));
             }
             
             
             orden *ordenNueva = new orden(carro_nuevo, comidaPesada, extraOrden, postreOrden, bebidaOrden);
             currentRestaurant->addOrder(ordenNueva);
 
-            cout<<"Agregado al restaurante"<<endl;
+            cout<<"Creando orden y agregandose al restaurante"<<endl;
+
+            
+            
+
+            
+            
 
             //Se saca random para para realizar cada cierto tiempo
              
@@ -138,10 +144,6 @@ public:
         // currentRestaurant->addOrder();
         // se procesa el elemento carro con su orden
         // Luego se usa el .h restaurant para prepararla
-    }
-
-    void generarParteOrden(int cantParteOrden, List<string> *pListaParteOrden, vector<string> pvectorParteOrden){
-        pvectorParteOrden.push_back(pListaParteOrden->getDataRandom(cantParteOrden));
     }
 
     void setRestaurant(Restaurant *current)

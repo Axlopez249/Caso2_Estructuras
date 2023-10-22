@@ -133,7 +133,7 @@ public:
                 Carro* carro = new Carro(carroID++);
                 colaCarro->enqueue(carro);
             }
-            //cout<<"hola1"<<endl;
+            //cout<<"Se generaron 100 carros"<<endl;
             std::this_thread::sleep_for(std::chrono::milliseconds(configCarros.intervalo * 1000));
         }
     }
@@ -163,7 +163,7 @@ public:
                     current = current->getNext();
                 }
 
-                cout<<"hola"<<endl;
+                //cout<<"Ingresando carro a la ventanilla"<<endl;
             }
             contadorLocal++;
             if (contadorLocal == 6)
